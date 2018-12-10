@@ -5,6 +5,7 @@ using System.IO;
 using System.Windows;
 using VirusTotalNET;
 using VirusTotalNET.Results;
+using System.Threading.Tasks;
 
 namespace VTHelper
 {
@@ -12,7 +13,11 @@ namespace VTHelper
     /// Logika interakcji dla klasy App.xaml
     /// </summary>
     public partial class App : Application
-    {        
+    {
+        static VirusTotal vt = new VirusTotal(GetAPIKey());
+
+        public static VirusTotal Vt { get => vt; set => vt = value; }
+
         public static string GetAPIKey()
         {
             // Open the file to read from.
@@ -25,10 +30,23 @@ namespace VTHelper
         /// <summary>
         /// 
         /// </summary>
-        public static async System.Threading.Tasks.Task ScanDomainAsync(string domain)
+        public static async Task<DomainReport> ScanDomainAsync(string domain)
+        {   
+            DomainReport domainReport = await Vt.GetDomainReportAsync(domain);
+            return domainReport;
+        }
+
+        public static async Task<FileReport> ScanFileAsync(string file)
         {
-            VirusTotal vt = new VirusTotal(App.GetAPIKey());
-            DomainReport domainReport = await vt.GetDomainReportAsync(domain);
+            FileInfo fileInfo = new FileInfo(file);
+            FileReport fileReport = await Vt.GetFileReportAsync(fileInfo);
+            return fileReport;
+        }
+
+        public static async Task<IPReport> IPReportAsync(string ip)
+        {
+            IPReport iPReport = await Vt.GetIPReportAsync(ip);
+            return iPReport;
         }
     }
 }
