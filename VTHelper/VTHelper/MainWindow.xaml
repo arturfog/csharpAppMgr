@@ -5,29 +5,82 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VTHelper"
         mc:Ignorable="d"
-        Title="MainWindow" Height="440" Width="500" MinWidth="500" MinHeight="440" MaxWidth="600" MaxHeight="500">
+        Title="MainWindow" Height="440" Width="700" MinWidth="700" MinHeight="440" MaxWidth="600" MaxHeight="500">
     <Grid>
-        <StackPanel HorizontalAlignment="Left" Width="334" Margin="159,0,0,0" Name="ScanDomain_Panel" Visibility="Hidden">
-            <Label Content="Scan domain"/>
-            <StackPanel Orientation="Horizontal" Height="100" Width="300">
+        <StackPanel HorizontalAlignment="Left" Width="534" Margin="159,0,0,0" Name="ScanDomain_Panel">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="pack://siteoforigin:,,,/Resources/256_scan_file.png" Width="64"></Image>
+                <Label Content="Scan domain" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="100" Width="450">
                 <Label  Content="Domain:" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBox Name="DomainName_TextBox"  TextWrapping="Wrap" Height="20" Width="200" Text="" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Width="10"></Label>
+                <Button Height="20" Content="Get domain report" Width="144" Click="GetDomainReportBtn_Click"/>
             </StackPanel>
-            <Button Content="Get domain report" Width="144" Click="GetDomainReportBtn_Click"/>
+            
+            
+
+            <Label></Label>
+
+            <TabControl Width="490">
+                <TabItem Header="General">
+                    <Label Content="Detection" />
+                </TabItem>
+                <TabItem Header="Details">
+                    <ScrollViewer>
+                    <Grid Height="150">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="220" />
+                            <ColumnDefinition Width="260" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                        
+                        <Label Content="BitDefender domain category:" Grid.Row="0" Grid.Column="0"/>
+                        <Label Name="BitDefenderDomainCat_Lbl" Grid.Row="0" Grid.Column="1"/>
+
+                        <Label Content="Force point threat seeker category:" Grid.Row="1" Grid.Column="0"/>
+                        <Label Name="ForcePointDomainCat_Lbl" Grid.Row="1" Grid.Column="1"/>
+
+                        <Label Content="WHOIS:" Grid.Row="2" Grid.Column="0"/>
+                            <TextBox  Name="WHOIS_Lbl" Grid.Row="2" Grid.Column="1">
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox">
+                                        <Setter Property="IsReadOnly" Value="True" />
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+            </TabControl>
         </StackPanel>
-        <StackPanel HorizontalAlignment="Left" Width="334" Margin="159,0,0,0" Name="ScanFile_Panel">
-            <Label Content="Scan file"/>
-            <StackPanel Orientation="Horizontal" Height="100" Width="300">
+        
+        <StackPanel HorizontalAlignment="Left" Width="334" Margin="159,0,0,0" Name="ScanFile_Panel" Visibility="Hidden">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="pack://siteoforigin:,,,/Resources/256_scan_file.png" Width="64"></Image>
+                <Label Content="Scan file" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="100" Width="310">
                 <Label  Content="File:" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Label Width="10"></Label>
                 <TextBox Name="FileName_TextBox"  TextWrapping="Wrap" Height="20" Width="200" Text="" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Width="10"></Label>
                 <Button Height="20" Content="Select file" Click="GetFileReportBtn_Click"/>
             </StackPanel>
-            <Button Content="Scan file" Width="144" Click="GetDomainReportBtn_Click"/>
+            <Button Content="Scan file" Width="144" Click="Button_Click"/>
         </StackPanel>
-        <StackPanel Margin="0,0,334.333,-0.333" Background="#FF292728" HorizontalAlignment="Right" Width="159">
-            <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Content="Scan file" Foreground="White" Click="Button_Click_1"/>
+        
+        <StackPanel Margin="0,0,534.333,-0.333" Background="#FF292728" HorizontalAlignment="Right" Width="159">
+            <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Content="Scan file" Foreground="White" Click="ScanFileTabBtn_Click"/>
             <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Content="Get file report" Foreground="White"/>
-            <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Content="Scan domain" Foreground="White" Click="Button_Click"/>
+            <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Content="Scan domain" Foreground="White" Click="ScanDomainTabBtn_Click"/>
             <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Content="Scan IP" Foreground="White"/>
             <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Content="Settings" Foreground="White"/>
             <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Content="About" Foreground="White"/>
