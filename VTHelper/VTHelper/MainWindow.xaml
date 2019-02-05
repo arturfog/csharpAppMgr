@@ -7,10 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="440" Width="700" MinWidth="700" MinHeight="440" MaxWidth="600" MaxHeight="500">
     <Grid>
-        <StackPanel HorizontalAlignment="Left" Width="534" Margin="159,0,0,0" Name="ScanDomain_Panel">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="pack://siteoforigin:,,,/Resources/256_scan_file.png" Width="64"></Image>
-                <Label Content="Scan domain" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <!-- /////////////////////////////////// -->
+        <!-- ////// SCAN DOMAIN START ////////// -->
+        <!-- /////////////////////////////////// -->
+        <StackPanel HorizontalAlignment="Left" Width="544" Margin="149,0,0,0" Name="ScanDomain_Panel">
+            <StackPanel Orientation="Horizontal" Background="DimGray" Height="64">
+                <Label></Label>
+                <Image Source="pack://siteoforigin:,,,/Resources/256_domain.png" Width="48"></Image>
+                <Label Content="Scan domain" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="100" Width="450">
                 <Label  Content="Domain:" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -19,8 +23,6 @@
                 <Button Height="20" Content="Get domain report" Width="144" Click="GetDomainReportBtn_Click"/>
             </StackPanel>
             
-            
-
             <Label></Label>
 
             <TabControl Width="490">
@@ -61,11 +63,82 @@
                 </TabItem>
             </TabControl>
         </StackPanel>
-        
-        <StackPanel HorizontalAlignment="Left" Width="334" Margin="159,0,0,0" Name="ScanFile_Panel" Visibility="Hidden">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="pack://siteoforigin:,,,/Resources/256_scan_file.png" Width="64"></Image>
-                <Label Content="Scan file" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <!-- ///////////////////////////////// -->
+        <!-- ////// SCAN DOMAIN END ////////// -->
+        <!-- ///////////////////////////////// -->
+
+        <!-- /////////////////////////////////// -->
+        <!-- ////// FILE REPORT START ////////// -->
+        <!-- /////////////////////////////////// -->
+        <StackPanel HorizontalAlignment="Left" Width="534" Margin="149,0,0,0" Name="FileReport_Panel" Visibility="Hidden">
+            <StackPanel Orientation="Horizontal" Background="DimGray" Height="64">
+                <Label></Label>
+                <Image Source="pack://siteoforigin:,,,/Resources/256_flle_report.png" Width="48" Height="48"></Image>
+                <Label Content="Get file report" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="100" Width="310">
+            </StackPanel>
+        </StackPanel>
+        <!-- ///////////////////////////////// -->
+        <!-- ////// FILE REPORT END ////////// -->
+        <!-- ///////////////////////////////// -->
+
+        <!-- /////////////////////////////// -->
+        <!-- ////// SCAN IP START ////////// -->
+        <!-- /////////////////////////////// -->
+        <StackPanel HorizontalAlignment="Left" Width="534" Margin="149,0,0,0" Name="ScanIP_Panel" Visibility="Hidden">
+            <StackPanel Orientation="Horizontal" Background="DimGray" Height="64">
+                <Label></Label>
+                <Image Source="pack://siteoforigin:,,,/Resources/256_ip.png" Width="48" Height="48"></Image>
+                <Label Content="Scan IP" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="100" Width="310">
+            </StackPanel>
+        </StackPanel>
+        <!-- ///////////////////////////// -->
+        <!-- ////// SCAN IP END ////////// -->
+        <!-- ///////////////////////////// -->
+
+        <!-- ///////////////////////////// -->
+        <!-- ////// ABOUT START ////////// -->
+        <!-- ///////////////////////////// -->
+        <StackPanel HorizontalAlignment="Left" Width="534" Margin="149,0,0,0" Name="About_Panel" Visibility="Hidden">
+            <StackPanel Orientation="Horizontal" Background="DimGray" Height="64">
+                <Label></Label>
+                <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="48" Height="48"></Image>
+                <Label Content="About" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="100" Width="310">
+            </StackPanel>
+        </StackPanel>
+        <!-- /////////////////////////// -->
+        <!-- ////// ABOUT END ////////// -->
+        <!-- /////////////////////////// -->
+
+        <!-- //////////////////////////////// -->
+        <!-- ////// SETTINGS START ////////// -->
+        <!-- //////////////////////////////// -->
+        <StackPanel HorizontalAlignment="Left" Width="534" Margin="149,0,0,0" Name="Settings_Panel" Visibility="Hidden">
+            <StackPanel Orientation="Horizontal" Background="DimGray" Height="64">
+                <Label></Label>
+                <Image Source="pack://siteoforigin:,,,/Resources/256_settings.png" Width="48" Height="48"></Image>
+                <Label Content="Settings" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="100" Width="310">
+            </StackPanel>
+        </StackPanel>
+        <!-- ////////////////////////////// -->
+        <!-- ////// SETTINGS END ////////// -->
+        <!-- ////////////////////////////// -->
+
+        <!-- ///////////////////////////////// -->
+        <!-- ////// SCAN FILE START ////////// -->
+        <!-- ///////////////////////////////// -->
+        <StackPanel HorizontalAlignment="Left" Width="534" Margin="149,0,0,0" Name="ScanFile_Panel" Visibility="Hidden">
+            <StackPanel Orientation="Horizontal" Background="DimGray" Height="64">
+                <Label></Label>
+                <Image Source="pack://siteoforigin:,,,/Resources/256_scan_file.png" Width="48" Height="48"></Image>
+                <Label Content="Scan file" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="100" Width="310">
                 <Label  Content="File:" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -76,14 +149,48 @@
             </StackPanel>
             <Button Content="Scan file" Width="144" Click="Button_Click"/>
         </StackPanel>
+        <!-- /////////////////////////////// -->
+        <!-- ////// SCAN FILE END ////////// -->
+        <!-- /////////////////////////////// -->
+        
         
         <StackPanel Margin="0,0,534.333,-0.333" Background="#FF292728" HorizontalAlignment="Right" Width="159">
-            <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Content="Scan file" Foreground="White" Click="ScanFileTabBtn_Click"/>
-            <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Content="Get file report" Foreground="White"/>
-            <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Content="Scan domain" Foreground="White" Click="ScanDomainTabBtn_Click"/>
-            <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Content="Scan IP" Foreground="White"/>
-            <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Content="Settings" Foreground="White"/>
-            <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Content="About" Foreground="White"/>
+            <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Click="ScanFileTabBtn_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://siteoforigin:,,,/Resources/256_scan_file.png" Width="32"/>
+                    <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" >Scan file</Label>
+                </StackPanel>
+            </Button>
+            <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Click="FileReportTabBtn_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://siteoforigin:,,,/Resources/256_flle_report.png" Width="32"/>
+                    <Label Width="100" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center">Get file report</Label>
+                </StackPanel>
+            </Button>
+            <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Click="ScanDomainTabBtn_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://siteoforigin:,,,/Resources/256_domain.png" Width="32"/>
+                    <Label Width="100" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center">Scan domain</Label>
+                </StackPanel>
+            </Button>
+            <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Click="ScanIPTabBtn_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://siteoforigin:,,,/Resources/256_ip.png" Width="32"/>
+                    <Label Width="100" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center">Scan IP</Label>
+                </StackPanel>
+            </Button>
+            <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Click="SettingsTabBtn_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://siteoforigin:,,,/Resources/256_settings.png" Width="32"/>
+                    <Label Width="100" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center">Settings</Label>
+                </StackPanel>
+            </Button>
+            <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Click="AboutTabBtn_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
+                    <Label Width="100" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center">About</Label>
+                </StackPanel>
+            </Button>
         </StackPanel>
     </Grid>
 </Window>

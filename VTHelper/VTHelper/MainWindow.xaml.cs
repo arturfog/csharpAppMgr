@@ -68,6 +68,20 @@ namespace VTHelper
                 FileName_TextBox.Text = fileInfo.FullName;
             }
         }
+
+
+        private void showTab(System.Windows.Controls.StackPanel panel)
+        {
+            ScanFile_Panel.Visibility = Visibility.Hidden;
+            ScanDomain_Panel.Visibility = Visibility.Hidden;
+            Settings_Panel.Visibility = Visibility.Hidden;
+            About_Panel.Visibility = Visibility.Hidden;
+            ScanIP_Panel.Visibility = Visibility.Hidden;
+            FileReport_Panel.Visibility = Visibility.Hidden;
+
+            panel.Visibility = Visibility.Visible;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -75,8 +89,7 @@ namespace VTHelper
         /// <param name="e"></param>
         private void ScanFileTabBtn_Click(object sender, RoutedEventArgs e)
         {
-            ScanFile_Panel.Visibility = Visibility.Visible;
-            ScanDomain_Panel.Visibility = Visibility.Hidden;
+            showTab(ScanFile_Panel);
         }
         /// <summary>
         /// 
@@ -85,10 +98,29 @@ namespace VTHelper
         /// <param name="e"></param>
         private void ScanDomainTabBtn_Click(object sender, RoutedEventArgs e)
         {
-            ScanFile_Panel.Visibility = Visibility.Hidden;
-            ScanDomain_Panel.Visibility = Visibility.Visible;
+            showTab(ScanDomain_Panel);
         }
-        
+
+        private void SettingsTabBtn_Click(object sender, RoutedEventArgs e)
+        {
+            showTab(Settings_Panel);
+        }
+
+        private void AboutTabBtn_Click(object sender, RoutedEventArgs e)
+        {
+            showTab(About_Panel);
+        }
+
+        private void ScanIPTabBtn_Click(object sender, RoutedEventArgs e)
+        {
+            showTab(ScanIP_Panel);
+        }
+
+        private void FileReportTabBtn_Click(object sender, RoutedEventArgs e)
+        {
+            showTab(FileReport_Panel);
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ParseFileReportAsync(FileName_TextBox.Text);
