@@ -30,20 +30,34 @@ namespace VTHelper
         /// <summary>
         /// 
         /// </summary>
-        public static async Task<DomainReport> ScanDomainAsync(string domain)
-        {   
+        public static async Task<UrlScanResult> ScanDomainAsync(string domain)
+        {
+            UrlScanResult urlScanResult = await Vt.ScanUrlAsync(domain);
+            return urlScanResult;
+        }
+
+        public static async Task<DomainReport> GetDomainReportAsync(string domain)
+        {
             DomainReport domainReport = await Vt.GetDomainReportAsync(domain);
             return domainReport;
         }
 
-        public static async Task<FileReport> ScanFileAsync(string file)
+
+        public static async Task<FileReport> GetFileReportAsync(string file)
         {
             FileInfo fileInfo = new FileInfo(file);
             FileReport fileReport = await Vt.GetFileReportAsync(fileInfo);
             return fileReport;
         }
 
-        public static async Task<IPReport> IPReportAsync(string ip)
+        public static async Task<ScanResult> ScanFileAsync(string file)
+        {
+            FileInfo fileInfo = new FileInfo(file);
+            ScanResult scanResult = await Vt.ScanFileAsync(fileInfo);
+            return scanResult;
+        }
+
+        public static async Task<IPReport> GetIPReportAsync(string ip)
         {
             IPReport iPReport = await Vt.GetIPReportAsync(ip);
             return iPReport;

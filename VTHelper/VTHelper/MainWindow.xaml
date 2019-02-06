@@ -30,35 +30,46 @@
                     <Label Content="Detection" />
                 </TabItem>
                 <TabItem Header="Details">
-                    <ScrollViewer>
-                    <Grid Height="150">
+                    <ScrollViewer Height="180" Width="480"  HorizontalScrollBarVisibility="Visible" 
+                                  VerticalScrollBarVisibility="Visible" CanContentScroll="True">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="220" />
-                            <ColumnDefinition Width="260" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
+                        </Grid.RowDefinitions>
+
+                        <Label Content="Alexa Domain Info:" Grid.Row="0" Grid.Column="0"/>
+                        <Label Name="AlexaDomainInfo_Lbl" Grid.Row="0" Grid.Column="1"/>
+
+                        <Label Content="Webutation Domain Info:" Grid.Row="1" Grid.Column="0"/>
+                        <Label Name="WebutationDomainInfo_Lbl" Grid.Row="1" Grid.Column="1"/>
+
+                        <Label Content="Force point threat seeker category:" Grid.Row="2" Grid.Column="0"/>
+                        <Label Name="ForcePointDomainCat_Lbl" Grid.Row="2" Grid.Column="1"/>
+
+                        <Label Content="Subdomains:" Grid.Row="3" Grid.Column="0"/>
+                        <Label Name="Subdomains_Lbl" Grid.Row="3" Grid.Column="1"/>
+
+                        <Label Content="WHOIS:" Grid.Row="4" Grid.Column="0"/>
+                        <TextBox  Name="WHOIS_Lbl" Grid.Row="4" Grid.Column="1">
+                            <TextBox.Style>
+                                <Style TargetType="TextBox">
+                                    <Setter Property="IsReadOnly" Value="True" />
+                                    <Setter Property="BorderThickness" Value="0" />
+                                    <Setter Property="TextWrapping" Value="Wrap" />
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
                         
-                        <Label Content="BitDefender domain category:" Grid.Row="0" Grid.Column="0"/>
-                        <Label Name="BitDefenderDomainCat_Lbl" Grid.Row="0" Grid.Column="1"/>
-
-                        <Label Content="Force point threat seeker category:" Grid.Row="1" Grid.Column="0"/>
-                        <Label Name="ForcePointDomainCat_Lbl" Grid.Row="1" Grid.Column="1"/>
-
-                        <Label Content="WHOIS:" Grid.Row="2" Grid.Column="0"/>
-                            <TextBox  Name="WHOIS_Lbl" Grid.Row="2" Grid.Column="1">
-                                <TextBox.Style>
-                                    <Style TargetType="TextBox">
-                                        <Setter Property="IsReadOnly" Value="True" />
-                                        <Setter Property="BorderThickness" Value="0" />
-                                        <Setter Property="TextWrapping" Value="Wrap" />
-                                    </Style>
-                                </TextBox.Style>
-                            </TextBox>
-                        </Grid>
+                        
+                    </Grid>
                     </ScrollViewer>
                 </TabItem>
             </TabControl>
@@ -77,7 +88,22 @@
                 <Label Content="Get file report" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="100" Width="310">
+                <Label  Content="File:" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Label Width="10"></Label>
+                <TextBox Name="ReportFileName_TextBox"  TextWrapping="Wrap" Height="20" Width="200" Text="" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Width="10"></Label>
+                <Button Height="20" Content="Select file" Click="GetFileReportBtn_Click"/>
             </StackPanel>
+
+            <Label></Label>
+
+            <TabControl Width="490">
+                <TabItem Header="General">
+                    <Label Content="Detection" />
+                </TabItem>
+                <TabItem Header="Details">
+                </TabItem>
+            </TabControl>
         </StackPanel>
         <!-- ///////////////////////////////// -->
         <!-- ////// FILE REPORT END ////////// -->
@@ -92,8 +118,22 @@
                 <Image Source="pack://siteoforigin:,,,/Resources/256_ip.png" Width="48" Height="48"></Image>
                 <Label Content="Scan IP" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="100" Width="310">
+            <StackPanel Orientation="Horizontal" Height="100" Width="450">
+                <Label  Content="IP:" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBox Name="IP_TextBox"  TextWrapping="Wrap" Height="20" Width="200" Text="" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Width="10"></Label>
+                <Button Height="20" Content="Get IP report" Width="144" Click="GetDomainReportBtn_Click"/>
             </StackPanel>
+
+            <Label></Label>
+
+            <TabControl Width="490">
+                <TabItem Header="General">
+                    <Label Content="Detection" />
+                </TabItem>
+                <TabItem Header="Details">
+                </TabItem>
+            </TabControl>
         </StackPanel>
         <!-- ///////////////////////////// -->
         <!-- ////// SCAN IP END ////////// -->
@@ -125,6 +165,10 @@
                 <Label Content="Settings" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="100" Width="310">
+                <ComboBox>
+                    <ComboBoxItem Content="English"></ComboBoxItem>
+                    <ComboBoxItem Content="Polski"></ComboBoxItem>
+                </ComboBox>
             </StackPanel>
         </StackPanel>
         <!-- ////////////////////////////// -->

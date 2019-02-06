@@ -21,10 +21,14 @@ namespace VTHelper
         /// <param name="domain"></param>
         private async void ParseDomainReportAsync(string domain)
         {
-            DomainReport domainReport = await App.ScanDomainAsync(domain);
-            BitDefenderDomainCat_Lbl.Content = domainReport.BitDefenderCategory;
+            DomainReport domainReport = await App.GetDomainReportAsync(domain);
+            
             ForcePointDomainCat_Lbl.Content = domainReport.ForcePointThreatSeekerCategory;
+            AlexaDomainInfo_Lbl.Content = domainReport.AlexaDomainInfo;
             WHOIS_Lbl.Text = domainReport.WhoIs;
+            string subdomains = String.Join("\n", domainReport.SubDomains.ToArray());
+            Subdomains_Lbl.Content = subdomains;
+            WebutationDomainInfo_Lbl.Content = domainReport.WebutationDomainInfo.Verdict + "[Score: " + domainReport.WebutationDomainInfo.SafetyScore + "]";
         }
         /// <summary>
         /// 
@@ -32,7 +36,10 @@ namespace VTHelper
         /// <param name="filePath"></param>
         private async void ParseFileReportAsync(string filePath)
         {
-            FileReport fileReport = await App.ScanFileAsync(filePath);
+            ScanResult scanResult = await App.ScanFileAsync(filePath);
+            //scanResult.MD5;
+            //scanResult.SHA256;
+            //scanResult.Permalink;
         }
         /// <summary>
         /// 
@@ -40,7 +47,9 @@ namespace VTHelper
         /// <param name="ip"></param>
         private async void ParseIPReportAsync(string ip)
         {
-            IPReport iPReport = await App.IPReportAsync(ip);
+            IPReport ipReport = await App.GetIPReportAsync(ip);
+            //ipReport.Country;
+            //ipReport.AsOwner;
         }
         /// <summary>
         /// 
@@ -58,12 +67,12 @@ namespace VTHelper
         /// <param name="e"></param>
         private void GetFileReportBtn_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
 
-            Nullable<bool> result = openFileDialog1.ShowDialog();
+            Nullable<bool> result = openFileDialog.ShowDialog();
             if (result == true)
             {
-                FileInfo fileInfo = new FileInfo(openFileDialog1.FileName);
+                FileInfo fileInfo = new FileInfo(openFileDialog.FileName);
                 string sha256 = VirusTotalNET.Helpers.HashHelper.GetSHA256(fileInfo);
                 FileName_TextBox.Text = fileInfo.FullName;
             }
