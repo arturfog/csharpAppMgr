@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VTHelper"
         mc:Ignorable="d"
-        Title="MainWindow" Height="440" Width="700" MinWidth="700" MinHeight="440" MaxWidth="600" MaxHeight="500">
+        Title="MainWindow" Height="440" Width="700" MinWidth="700" MinHeight="500" MaxHeight="500">
     <Grid>
         <!-- /////////////////////////////////// -->
         <!-- ////// SCAN DOMAIN START ////////// -->
@@ -16,18 +16,56 @@
                 <Image Source="pack://siteoforigin:,,,/Resources/256_domain.png" Width="48"></Image>
                 <Label Content="Scan domain" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="100" Width="450">
-                <Label  Content="Domain:" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                <TextBox Name="DomainName_TextBox"  TextWrapping="Wrap" Height="20" Width="200" Text="" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" Width="450" Height="70">
+                <Label  Content="Domain:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBox Name="DomainName_TextBox"  TextWrapping="Wrap" Height="28" Width="350" 
+                         HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" TextAlignment="Center"/>
                 <Label Width="10"></Label>
-                <Button Height="20" Content="Get domain report" Width="144" Click="GetDomainReportBtn_Click"/>
             </StackPanel>
-            
-            <Label></Label>
+            <StackPanel Orientation="Horizontal" Height="50" Width="310">
+                <Button Height="32"  Width="155" Click="ScanDomainBtn_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
+                        <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Scan domain</Label>
+                    </StackPanel>
+                </Button>
+                <Button Height="32"  Width="155" Click="GetDomainReportBtn_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://siteoforigin:,,,/Resources/256_flle_report.png" Width="32"/>
+                        <Label Width="110" HorizontalAlignment="Center" VerticalAlignment="Center">Get domain report</Label>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Height="32"  Width="355">
+                <Label Content="Permlink:" Grid.Row="2" Grid.Column="0"/>
+                <Label Name="DomainScanPermlink_Lbl" Grid.Row="2" Grid.Column="1"/>
+            </StackPanel>
 
             <TabControl Width="490">
                 <TabItem Header="General">
-                    <Label Content="Detection" />
+                    <ScrollViewer Height="180" Width="480"  HorizontalScrollBarVisibility="Visible" 
+                                  VerticalScrollBarVisibility="Visible" CanContentScroll="True">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Label Content="Posiitves:" Grid.Row="0" Grid.Column="0"/>
+                            <Label Name="DomainReportPositives_Lbl" Grid.Row="0" Grid.Column="1"/>
+
+                            <Label Content="Negatives:" Grid.Row="1" Grid.Column="0"/>
+                            <Label Name="DomainReportTotalEngines_Lbl" Grid.Row="1" Grid.Column="1"/>
+                        </Grid>
+                    </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Details">
                     <ScrollViewer Height="180" Width="480"  HorizontalScrollBarVisibility="Visible" 
@@ -78,66 +116,110 @@
         <!-- ////// SCAN DOMAIN END ////////// -->
         <!-- ///////////////////////////////// -->
 
-        <!-- /////////////////////////////////// -->
-        <!-- ////// FILE REPORT START ////////// -->
-        <!-- /////////////////////////////////// -->
-        <StackPanel HorizontalAlignment="Left" Width="534" Margin="149,0,0,0" Name="FileReport_Panel" Visibility="Hidden">
-            <StackPanel Orientation="Horizontal" Background="DimGray" Height="64">
-                <Label></Label>
-                <Image Source="pack://siteoforigin:,,,/Resources/256_flle_report.png" Width="48" Height="48"></Image>
-                <Label Content="Get file report" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="100" Width="310">
-                <Label  Content="File:" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                <Label Width="10"></Label>
-                <TextBox Name="ReportFileName_TextBox"  TextWrapping="Wrap" Height="20" Width="200" Text="" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <Label Width="10"></Label>
-                <Button Height="20" Content="Select file" Click="GetFileReportBtn_Click"/>
-            </StackPanel>
-
-            <Label></Label>
-
-            <TabControl Width="490">
-                <TabItem Header="General">
-                    <Label Content="Detection" />
-                </TabItem>
-                <TabItem Header="Details">
-                </TabItem>
-            </TabControl>
-        </StackPanel>
-        <!-- ///////////////////////////////// -->
-        <!-- ////// FILE REPORT END ////////// -->
-        <!-- ///////////////////////////////// -->
-
         <!-- /////////////////////////////// -->
         <!-- ////// SCAN IP START ////////// -->
         <!-- /////////////////////////////// -->
         <StackPanel HorizontalAlignment="Left" Width="534" Margin="149,0,0,0" Name="ScanIP_Panel" Visibility="Hidden">
             <StackPanel Orientation="Horizontal" Background="DimGray" Height="64">
                 <Label></Label>
-                <Image Source="pack://siteoforigin:,,,/Resources/256_ip.png" Width="48" Height="48"></Image>
+                <Image Source="pack://siteoforigin:,,,/Resources/256_domain.png" Width="48"></Image>
                 <Label Content="Scan IP" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="100" Width="450">
-                <Label  Content="IP:" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                <TextBox Name="IP_TextBox"  TextWrapping="Wrap" Height="20" Width="200" Text="" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" Width="450" Height="70">
+                <Label  Content="IP:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBox Name="IP_TextBox"  TextWrapping="Wrap" Height="28" Width="350" 
+                         HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" TextAlignment="Center"/>
                 <Label Width="10"></Label>
-                <Button Height="20" Content="Get IP report" Width="144" Click="GetDomainReportBtn_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="50" Width="310">
+                <Button Height="32"  Width="155" Click="ScanDomainBtn_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
+                        <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Scan IP</Label>
+                    </StackPanel>
+                </Button>
+                <Button Height="32"  Width="155" Click="GetDomainReportBtn_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://siteoforigin:,,,/Resources/256_flle_report.png" Width="32"/>
+                        <Label Width="110" HorizontalAlignment="Center" VerticalAlignment="Center">Get IP report</Label>
+                    </StackPanel>
+                </Button>
             </StackPanel>
 
-            <Label></Label>
+            <StackPanel Orientation="Horizontal" Height="32"  Width="355">
+                <Label Content="Permlink:" Grid.Row="2" Grid.Column="0"/>
+                <Label Name="IPScanPermlink_Lbl" Grid.Row="2" Grid.Column="1"/>
+            </StackPanel>
 
             <TabControl Width="490">
                 <TabItem Header="General">
                     <Label Content="Detection" />
                 </TabItem>
                 <TabItem Header="Details">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="220" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Label Content="IP Country:" Grid.Row="0" Grid.Column="0"/>
+                        <Label Name="IPCountry_Lbl" Grid.Row="0" Grid.Column="1"/>
+
+                        <Label Content="IP Owner:" Grid.Row="1" Grid.Column="0"/>
+                        <Label Name="IPOwner_Lbl" Grid.Row="1" Grid.Column="1"/>
+                    </Grid>
                 </TabItem>
             </TabControl>
         </StackPanel>
         <!-- ///////////////////////////// -->
         <!-- ////// SCAN IP END ////////// -->
         <!-- ///////////////////////////// -->
+
+        <!-- ///////////////////////////// -->
+        <!-- ////// SCAN URL START /////// -->
+        <!-- ///////////////////////////// -->
+        <StackPanel HorizontalAlignment="Left" Width="534" Margin="149,0,0,0" Name="ScanURL_Panel" Visibility="Hidden">
+            <StackPanel Orientation="Horizontal" Background="DimGray" Height="64">
+                <Label></Label>
+                <Image Source="pack://siteoforigin:,,,/Resources/256_domain.png" Width="48"></Image>
+                <Label Content="Scan URL" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Width="450" Height="70">
+                <Label  Content="URL:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBox Name="URL_TextBox"  TextWrapping="Wrap" Height="28" Width="350" 
+                         HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" TextAlignment="Center"/>
+                <Label Width="10"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="50" Width="310">
+                <Button Height="32"  Width="155" Click="ScanDomainBtn_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
+                        <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Scan URL</Label>
+                    </StackPanel>
+                </Button>
+                <Button Height="32"  Width="155" Click="GetDomainReportBtn_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://siteoforigin:,,,/Resources/256_flle_report.png" Width="32"/>
+                        <Label Width="110" HorizontalAlignment="Center" VerticalAlignment="Center">Get URL report</Label>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Height="32"  Width="355">
+                <Label Content="Permlink:" Grid.Row="2" Grid.Column="0"/>
+                <Label Name="URLScanPermlink_Lbl" Grid.Row="2" Grid.Column="1"/>
+            </StackPanel>
+        </StackPanel>
+        <!-- /////////////////////////// -->
+        <!-- ////// SCAN URL END /////// -->
+        <!-- /////////////////////////// -->
 
         <!-- ///////////////////////////// -->
         <!-- ////// ABOUT START ////////// -->
@@ -165,7 +247,7 @@
                 <Label Content="Settings" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="100" Width="310">
-                <ComboBox>
+                <ComboBox Text="English">
                     <ComboBoxItem Content="English"></ComboBoxItem>
                     <ComboBoxItem Content="Polski"></ComboBoxItem>
                 </ComboBox>
@@ -184,14 +266,59 @@
                 <Image Source="pack://siteoforigin:,,,/Resources/256_scan_file.png" Width="48" Height="48"></Image>
                 <Label Content="Scan file" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="100" Width="310">
-                <Label  Content="File:" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <StackPanel Orientation="Horizontal" Height="70" Width="450">
+                <Label  Content="File:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBox Name="FileName_TextBox"  TextWrapping="Wrap" Height="28" Width="350" 
+                         HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" TextAlignment="Center"/>
                 <Label Width="10"></Label>
-                <TextBox Name="FileName_TextBox"  TextWrapping="Wrap" Height="20" Width="200" Text="" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <Label Width="10"></Label>
-                <Button Height="20" Content="Select file" Click="GetFileReportBtn_Click"/>
+                <Button Height="20" Content="Select file" Click="SelectFileBtn_Click"/>
             </StackPanel>
-            <Button Content="Scan file" Width="144" Click="Button_Click"/>
+            <StackPanel Orientation="Horizontal" Height="50" Width="310">
+                <Button Height="32"  Width="155" Click="ScanDomainBtn_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
+                        <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Scan file</Label>
+                    </StackPanel>
+                </Button>
+                <Button Height="32"  Width="155" Click="GetDomainReportBtn_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://siteoforigin:,,,/Resources/256_flle_report.png" Width="32"/>
+                        <Label Width="110" HorizontalAlignment="Center" VerticalAlignment="Center">Get file report</Label>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Height="32"  Width="355">
+                <Label Content="Permlink:" Grid.Row="2" Grid.Column="0"/>
+                <Label Name="FileScanPermlink_Lbl" Grid.Row="2" Grid.Column="1"/>
+            </StackPanel>
+
+            <TabControl Width="490">
+                <TabItem Header="General">
+                    <Label Content="Detection" />
+                </TabItem>
+                <TabItem Header="Details">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="220" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Label Content="MD5:" Grid.Row="0" Grid.Column="0"/>
+                        <Label Name="FileReportMD5_Lbl" Grid.Row="0" Grid.Column="1"/>
+
+                        <Label Content="SHA256:" Grid.Row="1" Grid.Column="0"/>
+                        <Label Name="FileReportSHA256_Lbl" Grid.Row="1" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
+            </TabControl>
         </StackPanel>
         <!-- /////////////////////////////// -->
         <!-- ////// SCAN FILE END ////////// -->
@@ -205,10 +332,10 @@
                     <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" >Scan file</Label>
                 </StackPanel>
             </Button>
-            <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Click="FileReportTabBtn_Click">
+            <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Click="ScanURLTabBtn_Click">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="pack://siteoforigin:,,,/Resources/256_flle_report.png" Width="32"/>
-                    <Label Width="100" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center">Get file report</Label>
+                    <Image Source="pack://siteoforigin:,,,/Resources/256_domain.png" Width="32"/>
+                    <Label Width="100" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center">Scan URL</Label>
                 </StackPanel>
             </Button>
             <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Click="ScanDomainTabBtn_Click">

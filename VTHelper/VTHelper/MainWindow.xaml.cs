@@ -30,6 +30,12 @@ namespace VTHelper
             Subdomains_Lbl.Content = subdomains;
             WebutationDomainInfo_Lbl.Content = domainReport.WebutationDomainInfo.Verdict + "[Score: " + domainReport.WebutationDomainInfo.SafetyScore + "]";
         }
+
+        private async void ScanDomainAsync(string domain)
+        {
+            UrlScanResult scanResult = await App.ScanDomainAsync(domain);
+            DomainScanPermlink_Lbl.Content = scanResult.Permalink;
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -48,8 +54,8 @@ namespace VTHelper
         private async void ParseIPReportAsync(string ip)
         {
             IPReport ipReport = await App.GetIPReportAsync(ip);
-            //ipReport.Country;
-            //ipReport.AsOwner;
+            IPCountry_Lbl.Content = ipReport.Country;
+            IPOwner_Lbl.Content = ipReport.AsOwner;
         }
         /// <summary>
         /// 
@@ -60,12 +66,17 @@ namespace VTHelper
         {
             ParseDomainReportAsync(DomainName_TextBox.Text);
         }
+
+        private void ScanDomainBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ScanDomainAsync(DomainName_TextBox.Text);
+        }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void GetFileReportBtn_Click(object sender, RoutedEventArgs e)
+        private void SelectFileBtn_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
@@ -86,7 +97,7 @@ namespace VTHelper
             Settings_Panel.Visibility = Visibility.Hidden;
             About_Panel.Visibility = Visibility.Hidden;
             ScanIP_Panel.Visibility = Visibility.Hidden;
-            FileReport_Panel.Visibility = Visibility.Hidden;
+            ScanURL_Panel.Visibility = Visibility.Hidden;
 
             panel.Visibility = Visibility.Visible;
         }
@@ -110,6 +121,11 @@ namespace VTHelper
             showTab(ScanDomain_Panel);
         }
 
+        private void ScanURLTabBtn_Click(object sender, RoutedEventArgs e)
+        {
+            showTab(ScanURL_Panel);
+        }
+
         private void SettingsTabBtn_Click(object sender, RoutedEventArgs e)
         {
             showTab(Settings_Panel);
@@ -125,14 +141,14 @@ namespace VTHelper
             showTab(ScanIP_Panel);
         }
 
-        private void FileReportTabBtn_Click(object sender, RoutedEventArgs e)
-        {
-            showTab(FileReport_Panel);
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ScanFileBtn_Click(object sender, RoutedEventArgs e)
         {
             ParseFileReportAsync(FileName_TextBox.Text);
+        }
+
+        private void GetIPReportBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ParseIPReportAsync(IP_TextBox.Text);
         }
     }
 }
