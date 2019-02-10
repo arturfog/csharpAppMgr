@@ -29,12 +29,45 @@ namespace VTHelper
             string subdomains = String.Join("\n", domainReport.SubDomains.ToArray());
             Subdomains_Lbl.Content = subdomains;
             WebutationDomainInfo_Lbl.Content = domainReport.WebutationDomainInfo.Verdict + "[Score: " + domainReport.WebutationDomainInfo.SafetyScore + "]";
+
+            if(domainReport.WebutationDomainInfo.SafetyScore > 50)
+            {
+                // safe
+            }
+
+            if(domainReport.DetectedUrls.Count > 0)
+            {
+                DomainReportURLDetectedPositives_Lbl.Content = domainReport.DetectedUrls[0].Positives;
+                DomainReportURLDetectedTotalEngines_Lbl.Content = domainReport.DetectedUrls[0].Total;
+                DomainReportURLDetectedDate_Lbl.Content = domainReport.DetectedUrls[0].ScanDate;
+            }
+            if(domainReport.DetectedDownloadedSamples.Count > 0)
+            {
+                DomainReportDownloadSamplesPosisives_Lbl.Content = domainReport.DetectedDownloadedSamples[0].Positives;
+                DomainReportDownloadSamplesTotal_Lbl.Content = domainReport.DetectedDownloadedSamples[0].Total;
+            }
+            if(domainReport.UndetectedUrls.Count > 0)
+            {
+                DomainReportURLUndetectedPositives_Lbl.Content = domainReport.UndetectedUrls[0][2];
+                DomainReportURLUndetectedTotalEngines_Lbl.Content = domainReport.UndetectedUrls[0][3];
+                DomainReportURLUndetectedDate_Lbl.Content = domainReport.UndetectedUrls[0][4];
+            }
+            if(domainReport.UndetectedDownloadedSamples.Count > 0)
+            {
+                DomainReportUndetectedDownloadSamplesPosisives_Lbl.Content = domainReport.UndetectedDownloadedSamples[0].Positives;
+                DomainReportUndetectedDownloadSamplesTotal_Lbl.Content = domainReport.UndetectedDownloadedSamples[0].Total;
+                DomainReportUndetectedDownloadSamplesDate_Lbl.Content = domainReport.UndetectedDownloadedSamples[0].Date;
+            }
         }
 
         private async void ScanDomainAsync(string domain)
         {
             UrlScanResult scanResult = await App.ScanDomainAsync(domain);
             DomainScanPermlink_Lbl.Content = scanResult.Permalink;
+            if(scanResult.ResponseCode.ToString() == "Queued")
+            {
+
+            }
         }
         /// <summary>
         /// 
@@ -56,6 +89,7 @@ namespace VTHelper
             IPReport ipReport = await App.GetIPReportAsync(ip);
             IPCountry_Lbl.Content = ipReport.Country;
             IPOwner_Lbl.Content = ipReport.AsOwner;
+            //ipReport.DetectedUrls[0].Total;
         }
         /// <summary>
         /// 
