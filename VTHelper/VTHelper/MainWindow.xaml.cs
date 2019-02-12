@@ -11,17 +11,21 @@ namespace VTHelper
     /// </summary>
     public partial class MainWindow : Window
     {
+        private DomainReport domainReport;
         public MainWindow()
         {
             InitializeComponent();
         }
+        const string urlScanLinkStart = "https://www.virustotal.com/#/url/";
+        const string fileScanLinkStart = "https://www.virustotal.com/#/file/";
+        const string urlScanLinkEnd = "/detection";
         /// <summary>
         /// 
         /// </summary>
         /// <param name="domain"></param>
         private async void ParseDomainReportAsync(string domain)
         {
-            DomainReport domainReport = await App.GetDomainReportAsync(domain);
+            domainReport = await App.GetDomainReportAsync(domain);
             
             ForcePointDomainCat_Lbl.Content = domainReport.ForcePointThreatSeekerCategory;
             AlexaDomainInfo_Lbl.Content = domainReport.AlexaDomainInfo;
@@ -45,6 +49,7 @@ namespace VTHelper
             {
                 DomainReportDownloadSamplesPosisives_Lbl.Content = domainReport.DetectedDownloadedSamples[0].Positives;
                 DomainReportDownloadSamplesTotal_Lbl.Content = domainReport.DetectedDownloadedSamples[0].Total;
+                DomainReportDownloadSamplesDate_Lbl.Content = domainReport.DetectedDownloadedSamples[0].Date;
             }
             if(domainReport.UndetectedUrls.Count > 0)
             {
@@ -56,7 +61,7 @@ namespace VTHelper
             {
                 DomainReportUndetectedDownloadSamplesPosisives_Lbl.Content = domainReport.UndetectedDownloadedSamples[0].Positives;
                 DomainReportUndetectedDownloadSamplesTotal_Lbl.Content = domainReport.UndetectedDownloadedSamples[0].Total;
-                DomainReportUndetectedDownloadSamplesDate_Lbl.Content = domainReport.UndetectedDownloadedSamples[0].Date;
+                DomainReportUndetectedDownloadSamplesDate_Lbl.Content = domainReport.UndetectedDownloadedSamples[0].Date;                
             }
         }
 
@@ -183,6 +188,35 @@ namespace VTHelper
         private void GetIPReportBtn_Click(object sender, RoutedEventArgs e)
         {
             ParseIPReportAsync(IP_TextBox.Text);
+        }
+
+        private void DomainReportURLDetectedLink_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(domainReport.DetectedUrls[0].Url);
+        }
+
+        private void DomainReportDownloadSamplesLink_Click(object sender, RoutedEventArgs e)
+        {
+            string hash = domainReport.DetectedDownloadedSamples[0].Sha256;
+            string link = String.Concat(fileScanLinkStart, hash, urlScanLinkEnd);
+
+            System.Diagnostics.Process.Start(link);
+        }
+
+        private void DomainReportURLUndetectedLink_Click(object sender, RoutedEventArgs e)
+        {
+            string hash = domainReport.UndetectedUrls[0][1];
+            string link = String.Concat(urlScanLinkStart, hash, urlScanLinkEnd);
+
+            System.Diagnostics.Process.Start(link);
+        }
+
+        private void DomainReportUndetectedDownloadSamplesLink_Click(object sender, RoutedEventArgs e)
+        {
+            string hash = domainReport.UndetectedDownloadedSamples[0].Sha256;
+            string link = String.Concat(fileScanLinkStart, hash, urlScanLinkEnd);
+
+            System.Diagnostics.Process.Start(link);
         }
     }
 }
