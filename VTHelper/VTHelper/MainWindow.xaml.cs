@@ -12,6 +12,8 @@ namespace VTHelper
     public partial class MainWindow : Window
     {
         private DomainReport domainReport;
+        private IPReport ipReport;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -91,10 +93,17 @@ namespace VTHelper
         /// <param name="ip"></param>
         private async void ParseIPReportAsync(string ip)
         {
-            IPReport ipReport = await App.GetIPReportAsync(ip);
+            ipReport = await App.GetIPReportAsync(ip);
             IPCountry_Lbl.Content = ipReport.Country;
             IPOwner_Lbl.Content = ipReport.AsOwner;
-            //ipReport.DetectedUrls[0].Total;
+
+            IPReportURLDetectedPositives_Lbl.Content = ipReport.DetectedUrls[0].Positives;
+            IPReportURLDetectedTotalEngines_Lbl.Content = ipReport.DetectedUrls[0].Total;
+            IPReportURLDetectedDate_Lbl.Content = ipReport.DetectedUrls[0].ScanDate;
+
+            IPReportDownloadSamplesPosisives_Lbl.Content = ipReport.DetectedDownloadedSamples[0].Positives;
+            IPReportDownloadSamplesTotal_Lbl.Content = ipReport.DetectedDownloadedSamples[0].Total;
+            IPReportDownloadSamplesDate_Lbl.Content = ipReport.DetectedDownloadedSamples[0].Date;
         }
         /// <summary>
         /// 
@@ -197,10 +206,13 @@ namespace VTHelper
 
         private void DomainReportDownloadSamplesLink_Click(object sender, RoutedEventArgs e)
         {
-            string hash = domainReport.DetectedDownloadedSamples[0].Sha256;
-            string link = String.Concat(fileScanLinkStart, hash, urlScanLinkEnd);
+            if (domainReport.DetectedDownloadedSamples.Count > 0)
+            {
+                string hash = domainReport.DetectedDownloadedSamples[0].Sha256;
+                string link = String.Concat(fileScanLinkStart, hash, urlScanLinkEnd);
 
-            System.Diagnostics.Process.Start(link);
+                System.Diagnostics.Process.Start(link);
+            }
         }
 
         private void DomainReportURLUndetectedLink_Click(object sender, RoutedEventArgs e)
@@ -214,6 +226,14 @@ namespace VTHelper
         private void DomainReportUndetectedDownloadSamplesLink_Click(object sender, RoutedEventArgs e)
         {
             string hash = domainReport.UndetectedDownloadedSamples[0].Sha256;
+            string link = String.Concat(fileScanLinkStart, hash, urlScanLinkEnd);
+
+            System.Diagnostics.Process.Start(link);
+        }
+
+        private void IPReportDownloadSamplesLink_Click(object sender, RoutedEventArgs e)
+        {
+            string hash = ipReport.DetectedDownloadedSamples[0].Sha256;
             string link = String.Concat(fileScanLinkStart, hash, urlScanLinkEnd);
 
             System.Diagnostics.Process.Start(link);
