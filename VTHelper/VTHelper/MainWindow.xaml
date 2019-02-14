@@ -221,6 +221,22 @@
                         <Label Grid.Row="3" Grid.Column="4">
                             <Hyperlink Name="IPReportDownloadSamplesLink" Click="IPReportDownloadSamplesLink_Click">Link</Hyperlink>
                         </Label>
+
+                        <Label Content="Undetected URLs:" Grid.Row="4" Grid.Column="0"/>
+                        <Label Name="IPReportURLUndetectedPositives_Lbl" Content="0" Grid.Row="4" Grid.Column="1"/>
+                        <Label Name="IPReportURLUndetectedTotalEngines_Lbl" Content="0" Grid.Row="4" Grid.Column="2"/>
+                        <Label Name="IPReportURLUndetectedDate_Lbl" Grid.Row="4" Grid.Column="3"/>
+                        <Label Grid.Row="4" Grid.Column="4">
+                            <Hyperlink Name="IPReportURLUndetectedLink" Click="IPReportURLUndetectedLink_Click">Link</Hyperlink>
+                        </Label>
+
+                        <Label Content="Undetected download samples:" Grid.Row="5" Grid.Column="0"/>
+                        <Label Name="IPReportUndetectedDownloadSamplesPosisives_Lbl" Content="0" Grid.Row="5" Grid.Column="1"/>
+                        <Label Name="IPReportUndetectedDownloadSamplesTotal_Lbl" Content="0" Grid.Row="5" Grid.Column="2"/>
+                        <Label Name="IPReportUndetectedDownloadSamplesDate_Lbl" Grid.Row="5" Grid.Column="3"/>
+                        <Label Grid.Row="5" Grid.Column="4">
+                            <Hyperlink Name="IPReportUndetectedDownloadSamplesLink" Click="IPReportUndetectedDownloadSamplesLink_Click">Link</Hyperlink>
+                        </Label>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Details">
@@ -284,6 +300,43 @@
                 <Label Content="Permlink:" Grid.Row="2" Grid.Column="0"/>
                 <Label Name="URLScanPermlink_Lbl" Grid.Row="2" Grid.Column="1"/>
             </StackPanel>
+
+            <TabControl Width="490">
+                <TabItem Header="General">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="220" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Details">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="220" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                    </Grid>
+                </TabItem>
+            </TabControl>
         </StackPanel>
         <!-- /////////////////////////// -->
         <!-- ////// SCAN URL END /////// -->

@@ -97,13 +97,33 @@ namespace VTHelper
             IPCountry_Lbl.Content = ipReport.Country;
             IPOwner_Lbl.Content = ipReport.AsOwner;
 
-            IPReportURLDetectedPositives_Lbl.Content = ipReport.DetectedUrls[0].Positives;
-            IPReportURLDetectedTotalEngines_Lbl.Content = ipReport.DetectedUrls[0].Total;
-            IPReportURLDetectedDate_Lbl.Content = ipReport.DetectedUrls[0].ScanDate;
+            if (ipReport.DetectedUrls.Count > 0)
+            {
+                IPReportURLDetectedPositives_Lbl.Content = ipReport.DetectedUrls[0].Positives;
+                IPReportURLDetectedTotalEngines_Lbl.Content = ipReport.DetectedUrls[0].Total;
+                IPReportURLDetectedDate_Lbl.Content = ipReport.DetectedUrls[0].ScanDate;
+            }
 
-            IPReportDownloadSamplesPosisives_Lbl.Content = ipReport.DetectedDownloadedSamples[0].Positives;
-            IPReportDownloadSamplesTotal_Lbl.Content = ipReport.DetectedDownloadedSamples[0].Total;
-            IPReportDownloadSamplesDate_Lbl.Content = ipReport.DetectedDownloadedSamples[0].Date;
+            if (ipReport.DetectedDownloadedSamples.Count > 0)
+            {
+                IPReportDownloadSamplesPosisives_Lbl.Content = ipReport.DetectedDownloadedSamples[0].Positives;
+                IPReportDownloadSamplesTotal_Lbl.Content = ipReport.DetectedDownloadedSamples[0].Total;
+                IPReportDownloadSamplesDate_Lbl.Content = ipReport.DetectedDownloadedSamples[0].Date;
+            }
+
+            if (ipReport.UndetectedDownloadedSamples.Count > 0)
+            {
+                IPReportUndetectedDownloadSamplesTotal_Lbl.Content = ipReport.UndetectedDownloadedSamples[0].Total;
+                IPReportUndetectedDownloadSamplesPosisives_Lbl.Content = ipReport.UndetectedDownloadedSamples[0].Positives;
+                IPReportUndetectedDownloadSamplesDate_Lbl.Content = ipReport.UndetectedDownloadedSamples[0].Date;
+            }
+
+            if (ipReport.UndetectedUrls.Count > 0)
+            {
+                IPReportURLUndetectedPositives_Lbl.Content = ipReport.UndetectedUrls[0][2];
+                IPReportURLUndetectedTotalEngines_Lbl.Content = ipReport.UndetectedUrls[0][3];
+                IPReportURLUndetectedDate_Lbl.Content = ipReport.UndetectedUrls[0][4];
+            }
         }
         /// <summary>
         /// 
@@ -234,6 +254,22 @@ namespace VTHelper
         private void IPReportDownloadSamplesLink_Click(object sender, RoutedEventArgs e)
         {
             string hash = ipReport.DetectedDownloadedSamples[0].Sha256;
+            string link = String.Concat(fileScanLinkStart, hash, urlScanLinkEnd);
+
+            System.Diagnostics.Process.Start(link);
+        }
+
+        private void IPReportURLUndetectedLink_Click(object sender, RoutedEventArgs e)
+        {
+            string hash = ipReport.UndetectedUrls[0][1];
+            string link = String.Concat(urlScanLinkStart, hash, urlScanLinkEnd);
+
+            System.Diagnostics.Process.Start(link);
+        }
+
+        private void IPReportUndetectedDownloadSamplesLink_Click(object sender, RoutedEventArgs e)
+        {
+            string hash = ipReport.UndetectedDownloadedSamples[0].Sha256;
             string link = String.Concat(fileScanLinkStart, hash, urlScanLinkEnd);
 
             System.Diagnostics.Process.Start(link);
