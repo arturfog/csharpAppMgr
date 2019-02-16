@@ -282,13 +282,13 @@
                 <Label Width="10"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="50" Width="310">
-                <Button Height="32"  Width="155" Click="ScanDomainBtn_Click">
+                <Button Height="32"  Width="155" Click="ScanURLBtn_Click">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
                         <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Scan URL</Label>
                     </StackPanel>
                 </Button>
-                <Button Height="32"  Width="155" Click="GetDomainReportBtn_Click">
+                <Button Height="32"  Width="155" Click="GetURLReportBtn_Click">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="pack://siteoforigin:,,,/Resources/256_flle_report.png" Width="32"/>
                         <Label Width="110" HorizontalAlignment="Center" VerticalAlignment="Center">Get URL report</Label>
@@ -319,6 +319,17 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
+
+                        <Label Content="Type" Grid.Row="1" Grid.Column="0" FontWeight="Bold"/>
+                        <Label Content="Detected" Grid.Row="1" Grid.Column="1" FontWeight="Bold"/>
+                        <Label Content="Total" Grid.Row="1" Grid.Column="2" FontWeight="Bold"/>
+                        <Label Content="Scan date" Grid.Row="1" Grid.Column="3" FontWeight="Bold"/>
+                        <Label Content="Link" Grid.Row="1" Grid.Column="4" FontWeight="Bold"/>
+
+                        <Label Content="Detected URLs:" Grid.Row="2" Grid.Column="0"/>
+                        <Label Name="URLReportURLDetectedPositives_Lbl" Content="0" Grid.Row="2" Grid.Column="1"/>
+                        <Label Name="URLReportURLDetectedTotalEngines_Lbl" Content="0" Grid.Row="2" Grid.Column="2"/>
+                        <Label Name="URLReportURLDetectedDate_Lbl" Grid.Row="2" Grid.Column="3"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Details">
@@ -395,13 +406,13 @@
                 <Button Height="20" Content="Select file" Click="SelectFileBtn_Click"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="50" Width="310">
-                <Button Height="32"  Width="155" Click="ScanDomainBtn_Click">
+                <Button Height="32"  Width="155" Click="ScanFileBtn_Click">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
                         <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Scan file</Label>
                     </StackPanel>
                 </Button>
-                <Button Height="32"  Width="155" Click="GetDomainReportBtn_Click">
+                <Button Height="32"  Width="155" Click="GetFileReportBtn_Click">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="pack://siteoforigin:,,,/Resources/256_flle_report.png" Width="32"/>
                         <Label Width="110" HorizontalAlignment="Center" VerticalAlignment="Center">Get file report</Label>
@@ -416,7 +427,37 @@
 
             <TabControl Width="490">
                 <TabItem Header="General">
-                    <Label Content="Detection" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="220" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Label Content="Type" Grid.Row="1" Grid.Column="0" FontWeight="Bold"/>
+                        <Label Content="Detected" Grid.Row="1" Grid.Column="1" FontWeight="Bold"/>
+                        <Label Content="Total" Grid.Row="1" Grid.Column="2" FontWeight="Bold"/>
+                        <Label Content="Scan date" Grid.Row="1" Grid.Column="3" FontWeight="Bold"/>
+                        <Label Content="Link" Grid.Row="1" Grid.Column="4" FontWeight="Bold"/>
+
+                        <Label Content="Detected URLs:" Grid.Row="2" Grid.Column="0"/>
+                        <Label Name="FileReportPositives_Lbl" Content="0" Grid.Row="2" Grid.Column="1"/>
+                        <Label Name="FileReportTotalEngines_Lbl" Content="0" Grid.Row="2" Grid.Column="2"/>
+                        <Label Name="FileReportDate_Lbl" Grid.Row="2" Grid.Column="3"/>
+                        <Label Grid.Row="2" Grid.Column="4">
+                            <Hyperlink Name="FileReportLink" Click="FileReportLink_Click">Link</Hyperlink>
+                        </Label>
+                    </Grid>
                 </TabItem>
                 <TabItem Header="Details">
                     <Grid>

@@ -13,6 +13,8 @@ namespace VTHelper
     {
         private DomainReport domainReport;
         private IPReport ipReport;
+        private UrlReport urlReport;
+        private FileReport fileReport;
 
         public MainWindow()
         {
@@ -66,7 +68,10 @@ namespace VTHelper
                 DomainReportUndetectedDownloadSamplesDate_Lbl.Content = domainReport.UndetectedDownloadedSamples[0].Date;                
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="domain"></param>
         private async void ScanDomainAsync(string domain)
         {
             UrlScanResult scanResult = await App.ScanDomainAsync(domain);
@@ -79,13 +84,48 @@ namespace VTHelper
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="url"></param>
+        private async void ScanURLAsync(string url)
+        {
+            UrlReport urlReport = await App.GetUrlReportAsync(url);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        private async void ParseURLReportAsync(string url)
+        {
+            urlReport = await App.GetUrlReportAsync(url);
+
+            URLReportURLDetectedPositives_Lbl.Content = urlReport.Positives;
+            URLReportURLDetectedTotalEngines_Lbl.Content = urlReport.Total;
+            URLReportURLDetectedDate_Lbl.Content = urlReport.ScanDate;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="filePath"></param>
-        private async void ParseFileReportAsync(string filePath)
+        private async void ScanFileAsync(string filePath)
         {
             ScanResult scanResult = await App.ScanFileAsync(filePath);
             //scanResult.MD5;
             //scanResult.SHA256;
             //scanResult.Permalink;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filePath"></param>
+        private async void ParseFileReportAsync(string filePath)
+        {
+
+            fileReport = await App.GetFileReportAsync(filePath);
+            FileReportMD5_Lbl.Content = fileReport.MD5;
+            FileReportSHA256_Lbl.Content = fileReport.SHA256;
+
+            FileReportDate_Lbl.Content = fileReport.ScanDate;
+            FileReportPositives_Lbl.Content = fileReport.Positives;
+            FileReportTotalEngines_Lbl.Content = fileReport.Total;
         }
         /// <summary>
         /// 
@@ -125,19 +165,40 @@ namespace VTHelper
                 IPReportURLUndetectedDate_Lbl.Content = ipReport.UndetectedUrls[0][4];
             }
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        
         private void GetDomainReportBtn_Click(object sender, RoutedEventArgs e)
         {
             ParseDomainReportAsync(DomainName_TextBox.Text);
         }
-
+        
         private void ScanDomainBtn_Click(object sender, RoutedEventArgs e)
         {
             ScanDomainAsync(DomainName_TextBox.Text);
+        }
+
+        private void GetURLReportBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ParseURLReportAsync(URL_TextBox.Text);
+        }
+
+        private void ScanURLBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ScanURLAsync(URL_TextBox.Text);
+        }
+
+        private void ScanFileBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ScanFileAsync(FileName_TextBox.Text);
+        }
+
+        private void GetFileReportBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ParseFileReportAsync(FileName_TextBox.Text);
+        }
+
+        private void GetIPReportBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ParseIPReportAsync(IP_TextBox.Text);
         }
         /// <summary>
         /// 
@@ -209,16 +270,6 @@ namespace VTHelper
             showTab(ScanIP_Panel);
         }
 
-        private void ScanFileBtn_Click(object sender, RoutedEventArgs e)
-        {
-            ParseFileReportAsync(FileName_TextBox.Text);
-        }
-
-        private void GetIPReportBtn_Click(object sender, RoutedEventArgs e)
-        {
-            ParseIPReportAsync(IP_TextBox.Text);
-        }
-
         private void DomainReportURLDetectedLink_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start(domainReport.DetectedUrls[0].Url);
@@ -270,6 +321,14 @@ namespace VTHelper
         private void IPReportUndetectedDownloadSamplesLink_Click(object sender, RoutedEventArgs e)
         {
             string hash = ipReport.UndetectedDownloadedSamples[0].Sha256;
+            string link = String.Concat(fileScanLinkStart, hash, urlScanLinkEnd);
+
+            System.Diagnostics.Process.Start(link);
+        }
+
+        private void FileReportLink_Click(object sender, RoutedEventArgs e)
+        {
+            string hash = fileReport.SHA256;
             string link = String.Concat(fileScanLinkStart, hash, urlScanLinkEnd);
 
             System.Diagnostics.Process.Start(link);

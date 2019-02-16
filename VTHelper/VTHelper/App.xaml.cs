@@ -42,6 +42,12 @@ namespace VTHelper
             return domainReport;
         }
 
+        public static async Task<UrlReport> GetUrlReportAsync(string url)
+        {
+            UrlReport urlReport = await Vt.GetUrlReportAsync(url);
+            return urlReport;
+        }
+
 
         public static async Task<FileReport> GetFileReportAsync(string file)
         {
