@@ -457,6 +457,11 @@
                         <Label Grid.Row="2" Grid.Column="4">
                             <Hyperlink Name="FileReportLink" Click="FileReportLink_Click">Link</Hyperlink>
                         </Label>
+
+                        <Label Name="FileReportAV0Name_Lbl" Content="0" Grid.Row="3" Grid.Column="0"/>
+                        <Label Name="FileReportAV0VirusName_Lbl" Content="0" Grid.Row="3" Grid.Column="1"/>
+                        <Label Name="FileReportAV0Update_Lbl" Grid.Row="3" Grid.Column="2"/>
+                        <Label Name="FileReportAV0Version_Lbl" Grid.Row="3" Grid.Column="3"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Details">
@@ -478,6 +483,9 @@
 
                         <Label Content="SHA256:" Grid.Row="1" Grid.Column="0"/>
                         <Label Name="FileReportSHA256_Lbl" Grid.Row="1" Grid.Column="1"/>
+
+                        <Label Content="SHA1:" Grid.Row="2" Grid.Column="0"/>
+                        <Label Name="FileReportSHA1_Lbl" Grid.Row="2" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
             </TabControl>

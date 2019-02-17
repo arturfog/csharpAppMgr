@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Windows;
 using VirusTotalNET.Results;
+using System.Collections.Generic;
 
 namespace VTHelper
 {
@@ -100,6 +101,15 @@ namespace VTHelper
             URLReportURLDetectedPositives_Lbl.Content = urlReport.Positives;
             URLReportURLDetectedTotalEngines_Lbl.Content = urlReport.Total;
             URLReportURLDetectedDate_Lbl.Content = urlReport.ScanDate;
+
+            foreach (var item in urlReport.Scans)
+            {
+                if (item.Value.Detected)
+                {
+                    FileReportAV0Name_Lbl.Content = item.Key;
+                    FileReportAV0VirusName_Lbl.Content = item.Value.Result;
+                }
+            }
         }
         /// <summary>
         /// 
@@ -108,9 +118,10 @@ namespace VTHelper
         private async void ScanFileAsync(string filePath)
         {
             ScanResult scanResult = await App.ScanFileAsync(filePath);
-            //scanResult.MD5;
-            //scanResult.SHA256;
-            //scanResult.Permalink;
+            FileReportMD5_Lbl.Content = scanResult.MD5;
+            FileReportSHA256_Lbl.Content = scanResult.SHA256;
+            FileReportSHA1_Lbl.Content = scanResult.SHA1;
+            FileScanPermlink_Lbl.Content = scanResult.Permalink;
         }
         /// <summary>
         /// 
@@ -118,14 +129,24 @@ namespace VTHelper
         /// <param name="filePath"></param>
         private async void ParseFileReportAsync(string filePath)
         {
-
             fileReport = await App.GetFileReportAsync(filePath);
             FileReportMD5_Lbl.Content = fileReport.MD5;
             FileReportSHA256_Lbl.Content = fileReport.SHA256;
+            FileReportSHA1_Lbl.Content = fileReport.SHA1;
 
             FileReportDate_Lbl.Content = fileReport.ScanDate;
             FileReportPositives_Lbl.Content = fileReport.Positives;
             FileReportTotalEngines_Lbl.Content = fileReport.Total;
+            foreach(var item in fileReport.Scans)
+            {
+                if(item.Value.Detected)
+                {
+                    FileReportAV0Name_Lbl.Content = item.Key;
+                    FileReportAV0VirusName_Lbl.Content = item.Value.Result;
+                    FileReportAV0Update_Lbl.Content = item.Value.Update;
+                    FileReportAV0Version_Lbl.Content = item.Value.Version;
+                }
+            }
         }
         /// <summary>
         /// 
