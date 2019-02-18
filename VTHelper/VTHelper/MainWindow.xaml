@@ -7,44 +7,61 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="440" Width="700" MinWidth="700" MinHeight="500" MaxHeight="500">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
         <!-- /////////////////////////////////// -->
         <!-- ////// SCAN DOMAIN START ////////// -->
         <!-- /////////////////////////////////// -->
-        <StackPanel HorizontalAlignment="Left" Width="544" Margin="149,0,0,0" Name="ScanDomain_Panel">
-            <StackPanel Orientation="Horizontal" Background="DimGray" Height="64">
+        <StackPanel HorizontalAlignment="Stretch" Margin="159,0,0,0" Name="ScanDomain_Panel">
+            <StackPanel Orientation="Horizontal" Background="DimGray" Width="Auto" Height="64">
                 <Label></Label>
                 <Image Source="pack://siteoforigin:,,,/Resources/256_domain.png" Width="48"></Image>
                 <Label Content="Scan domain" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Width="450" Height="70">
-                <Label  Content="Domain:" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                <TextBox Name="DomainName_TextBox"  TextWrapping="Wrap" Height="28" Width="350" 
-                         HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" TextAlignment="Center"/>
-                <Label Width="10"></Label>
+
+            <StackPanel Background="WhiteSmoke" HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Horizontal" Width="520" Height="60" >
+                    <Label  Content="Domain:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <TextBox Name="DomainName_TextBox"  TextWrapping="Wrap" Height="28" Width="450" 
+                             HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" TextAlignment="Center"/>
+                    <Label Width="10"></Label>
+                </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="50" Width="310">
-                <Button Height="32"  Width="155" Click="ScanDomainBtn_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
-                        <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Scan domain</Label>
-                    </StackPanel>
-                </Button>
-                <Button Height="32"  Width="155" Click="GetDomainReportBtn_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://siteoforigin:,,,/Resources/256_flle_report.png" Width="32"/>
-                        <Label Width="110" HorizontalAlignment="Center" VerticalAlignment="Center">Get domain report</Label>
-                    </StackPanel>
-                </Button>
+            
+            <StackPanel Height="50" Background="WhiteSmoke" HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Horizontal" Width="310">
+                    <Button Height="32"  Width="155" Click="ScanDomainBtn_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
+                            <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Scan domain</Label>
+                        </StackPanel>
+                    </Button>
+                    <Button Height="32"  Width="155" Click="GetDomainReportBtn_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="pack://siteoforigin:,,,/Resources/256_flle_report.png" Width="32"/>
+                            <Label Width="110" HorizontalAlignment="Center" VerticalAlignment="Center">Get domain report</Label>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Height="32"  Width="355">
-                <Label Content="Permlink:" Grid.Row="2" Grid.Column="0"/>
-                <Label Name="DomainScanPermlink_Lbl" Grid.Row="2" Grid.Column="1"/>
+            <StackPanel Orientation="Horizontal" Height="0"  Width="355" Name="DomainPermlinkPanel" Visibility="Hidden">
+                <Label Content="Permlink:" />
+                <Label Name="DomainScanPermlink_Lbl" />
             </StackPanel>
 
-            <TabControl Width="490">
+            <StackPanel Height="32" Name="DomainScorePanel" Background="SandyBrown" HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Horizontal" Height="32" Width="200" HorizontalAlignment="Center">
+                    <Label  Content="Domain score:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Image Name="DomainScore_Icon" Source="pack://siteoforigin:,,,/Resources/256_warning.png" Width="32"/>
+                    <Label Name="DomainScore_Lbl" Content="(Unknown)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+
+            <TabControl>
                 <TabItem Header="General">
-                    <ScrollViewer Height="180" Width="480"  HorizontalScrollBarVisibility="Visible" 
+                    <ScrollViewer Height="230" HorizontalScrollBarVisibility="Visible" 
                                   VerticalScrollBarVisibility="Visible" CanContentScroll="True">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -76,6 +93,7 @@
                             <Label Name="DomainReportURLDetectedPositives_Lbl" Content="0" Grid.Row="2" Grid.Column="1"/>
                             <Label Name="DomainReportURLDetectedTotalEngines_Lbl" Content="0" Grid.Row="2" Grid.Column="2"/>
                             <Label Name="DomainReportURLDetectedDate_Lbl" Grid.Row="2" Grid.Column="3"/>
+                            <Label Name="DomainReportURLDetectedURL_Lbl" Grid.Row="2" Grid.Column="4"/>
 
                             <Label Content="Detected download samples:" Grid.Row="3" Grid.Column="0"/>
                             <Label Name="DomainReportDownloadSamplesPosisives_Lbl" Content="0" Grid.Row="3" Grid.Column="1"/>
@@ -104,7 +122,7 @@
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Details">
-                    <ScrollViewer Height="180" Width="480"  HorizontalScrollBarVisibility="Visible" 
+                    <ScrollViewer Height="230" HorizontalScrollBarVisibility="Visible" 
                                   VerticalScrollBarVisibility="Visible" CanContentScroll="True">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -112,6 +130,7 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -138,9 +157,11 @@
                                 </Style>
                             </TextBox.Style>
                         </TextBox>
-                        
-                        
-                    </Grid>
+
+                        <Label Content="Resoultions:" Grid.Row="5" Grid.Column="0"/>
+                        <Label Name="Resolutions_Lbl" Grid.Row="5" Grid.Column="1"/>
+
+                        </Grid>
                     </ScrollViewer>
                 </TabItem>
             </TabControl>
@@ -495,7 +516,7 @@
         <!-- /////////////////////////////// -->
         
         
-        <StackPanel Margin="0,0,534.333,-0.333" Background="#FF292728" HorizontalAlignment="Right" Width="159">
+        <StackPanel Background="#FF292728" HorizontalAlignment="Left" Width="159">
             <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Click="ScanFileTabBtn_Click">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="pack://siteoforigin:,,,/Resources/256_scan_file.png" Width="32"/>

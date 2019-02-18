@@ -4,6 +4,8 @@ using System.IO;
 using System.Windows;
 using VirusTotalNET.Results;
 using System.Collections.Generic;
+using System.Windows.Media;
+using System.Drawing;
 
 namespace VTHelper
 {
@@ -30,6 +32,7 @@ namespace VTHelper
         /// <param name="domain"></param>
         private async void ParseDomainReportAsync(string domain)
         {
+            var converter = new ImageSourceConverter();
             domainReport = await App.GetDomainReportAsync(domain);
             
             ForcePointDomainCat_Lbl.Content = domainReport.ForcePointThreatSeekerCategory;
@@ -39,9 +42,14 @@ namespace VTHelper
             Subdomains_Lbl.Content = subdomains;
             WebutationDomainInfo_Lbl.Content = domainReport.WebutationDomainInfo.Verdict + "[Score: " + domainReport.WebutationDomainInfo.SafetyScore + "]";
 
+            Resolutions_Lbl.Content = domainReport.Resolutions[0].IPAddress;
+
             if(domainReport.WebutationDomainInfo.SafetyScore > 50)
             {
-                // safe
+                DomainScorePanel.Background = System.Windows.Media.Brushes.Green;
+                DomainScore_Lbl.Content = "(Safe)";
+                //var dupa = converter.ConvertFromString("pack://siteoforigin:,,,/Resources/256_safe.png");
+                //DomainScore_Icon.Source = (ImageSource)dupa;
             }
 
             if(domainReport.DetectedUrls.Count > 0)
@@ -49,6 +57,7 @@ namespace VTHelper
                 DomainReportURLDetectedPositives_Lbl.Content = domainReport.DetectedUrls[0].Positives;
                 DomainReportURLDetectedTotalEngines_Lbl.Content = domainReport.DetectedUrls[0].Total;
                 DomainReportURLDetectedDate_Lbl.Content = domainReport.DetectedUrls[0].ScanDate;
+                DomainReportURLDetectedURL_Lbl.Content = domainReport.DetectedUrls[0].Url;
             }
             if(domainReport.DetectedDownloadedSamples.Count > 0)
             {
@@ -79,7 +88,8 @@ namespace VTHelper
             DomainScanPermlink_Lbl.Content = scanResult.Permalink;
             if(scanResult.ResponseCode.ToString() == "Queued")
             {
-
+                DomainPermlinkPanel.Height = 32;
+                DomainPermlinkPanel.Visibility = Visibility.Visible;
             }
         }
         /// <summary>
