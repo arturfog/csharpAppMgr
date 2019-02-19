@@ -6,6 +6,7 @@ using VirusTotalNET.Results;
 using System.Collections.Generic;
 using System.Windows.Media;
 using System.Drawing;
+using System.Windows.Media.Imaging;
 
 namespace VTHelper
 {
@@ -18,10 +19,28 @@ namespace VTHelper
         private IPReport ipReport;
         private UrlReport urlReport;
         private FileReport fileReport;
+        private static BitmapImage safeIcon;
+        private static BitmapImage dangerIcon;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            safeIcon = new BitmapImage();
+            safeIcon.BeginInit();
+            safeIcon.CacheOption = BitmapCacheOption.None;
+            safeIcon.CacheOption = BitmapCacheOption.OnLoad;
+            safeIcon.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            safeIcon.UriSource = new Uri("Resources/256_safe.png", UriKind.Relative);
+            safeIcon.EndInit();
+
+            dangerIcon = new BitmapImage();
+            dangerIcon.BeginInit();
+            dangerIcon.CacheOption = BitmapCacheOption.None;
+            dangerIcon.CacheOption = BitmapCacheOption.OnLoad;
+            dangerIcon.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            dangerIcon.UriSource = new Uri("Resources/256_danger.png", UriKind.Relative);
+            dangerIcon.EndInit();
         }
         const string urlScanLinkStart = "https://www.virustotal.com/#/url/";
         const string fileScanLinkStart = "https://www.virustotal.com/#/file/";
@@ -42,40 +61,59 @@ namespace VTHelper
             Subdomains_Lbl.Content = subdomains;
             WebutationDomainInfo_Lbl.Content = domainReport.WebutationDomainInfo.Verdict + "[Score: " + domainReport.WebutationDomainInfo.SafetyScore + "]";
 
-            Resolutions_Lbl.Content = domainReport.Resolutions[0].IPAddress;
+            //Resolutions_Lbl.Content = domainReport.Resolutions[0].IPAddress;
 
             if(domainReport.WebutationDomainInfo.SafetyScore > 50)
             {
-                DomainScorePanel.Background = System.Windows.Media.Brushes.Green;
+                DomainScorePanel.Background = System.Windows.Media.Brushes.LightGreen;
                 DomainScore_Lbl.Content = "(Safe)";
-                //var dupa = converter.ConvertFromString("pack://siteoforigin:,,,/Resources/256_safe.png");
-                //DomainScore_Icon.Source = (ImageSource)dupa;
+                DomainScore_Icon.Source = safeIcon;
+            } else
+            {
+                DomainScorePanel.Background = System.Windows.Media.Brushes.Red;
+                DomainScore_Lbl.Content = "(Dangerous)";
+                DomainScore_Icon.Source = dangerIcon;
             }
 
-            if(domainReport.DetectedUrls.Count > 0)
+            if (domainReport.DetectedUrls.Count > 0)
             {
                 DomainReportURLDetectedPositives_Lbl.Content = domainReport.DetectedUrls[0].Positives;
                 DomainReportURLDetectedTotalEngines_Lbl.Content = domainReport.DetectedUrls[0].Total;
                 DomainReportURLDetectedDate_Lbl.Content = domainReport.DetectedUrls[0].ScanDate;
                 DomainReportURLDetectedURL_Lbl.Content = domainReport.DetectedUrls[0].Url;
+                DomainRowDetectedURL.Height = new GridLength(1, GridUnitType.Auto);
+            } else {
+                DomainRowDetectedURL.Height = new GridLength(1, GridUnitType.Pixel);
             }
-            if(domainReport.DetectedDownloadedSamples.Count > 0)
+
+            if (domainReport.DetectedDownloadedSamples.Count > 0)
             {
                 DomainReportDownloadSamplesPosisives_Lbl.Content = domainReport.DetectedDownloadedSamples[0].Positives;
                 DomainReportDownloadSamplesTotal_Lbl.Content = domainReport.DetectedDownloadedSamples[0].Total;
                 DomainReportDownloadSamplesDate_Lbl.Content = domainReport.DetectedDownloadedSamples[0].Date;
+                DomainRowDetectedDownload.Height = new GridLength(1, GridUnitType.Auto);
+            } else {
+                DomainRowDetectedDownload.Height = new GridLength(1, GridUnitType.Pixel);
             }
+
             if(domainReport.UndetectedUrls.Count > 0)
             {
                 DomainReportURLUndetectedPositives_Lbl.Content = domainReport.UndetectedUrls[0][2];
                 DomainReportURLUndetectedTotalEngines_Lbl.Content = domainReport.UndetectedUrls[0][3];
                 DomainReportURLUndetectedDate_Lbl.Content = domainReport.UndetectedUrls[0][4];
+                DomainRowUndetectedURL.Height = new GridLength(1, GridUnitType.Auto);
+            } else {
+                DomainRowDetectedDownload.Height = new GridLength(1, GridUnitType.Pixel);
             }
+
             if(domainReport.UndetectedDownloadedSamples.Count > 0)
             {
                 DomainReportUndetectedDownloadSamplesPosisives_Lbl.Content = domainReport.UndetectedDownloadedSamples[0].Positives;
                 DomainReportUndetectedDownloadSamplesTotal_Lbl.Content = domainReport.UndetectedDownloadedSamples[0].Total;
-                DomainReportUndetectedDownloadSamplesDate_Lbl.Content = domainReport.UndetectedDownloadedSamples[0].Date;                
+                DomainReportUndetectedDownloadSamplesDate_Lbl.Content = domainReport.UndetectedDownloadedSamples[0].Date;
+                DomainRowUndetectedDownload.Height = new GridLength(1, GridUnitType.Auto);
+            } else {
+                DomainRowUndetectedDownload.Height = new GridLength(1, GridUnitType.Pixel);
             }
         }
         /// <summary>

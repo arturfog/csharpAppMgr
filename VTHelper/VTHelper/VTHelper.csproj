@@ -178,9 +178,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\256_danger.png">
+    <None Include="Resources\256_danger.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    </None>
     <None Include="Resources\256_safe.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
