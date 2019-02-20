@@ -60,16 +60,26 @@ namespace VTHelper
             string subdomains = String.Join("\n", domainReport.SubDomains.ToArray());
             Subdomains_Lbl.Content = subdomains;
             WebutationDomainInfo_Lbl.Content = domainReport.WebutationDomainInfo.Verdict + "[Score: " + domainReport.WebutationDomainInfo.SafetyScore + "]";
+            TrendMicroCategory_Lbl.Content = domainReport.TrendMicroCategory;
+            OperaDomainInfo_Lbl.Content = domainReport.OperaDomainInfo;
+            DrWebCategory_Lbl.Content = domainReport.DrWebCategory;
+            BitDefenderDomainInfo_Lbl.Content = domainReport.BitDefenderDomainInfo;
 
-            //Resolutions_Lbl.Content = domainReport.Resolutions[0].IPAddress;
+            DomainDetails_Stack.Visibility = Visibility.Visible;
 
-            if(domainReport.WebutationDomainInfo.SafetyScore > 50)
+            if (domainReport.Resolutions.Count > 0)
+            {
+                for (int i = 0; i < domainReport.Resolutions.Count; i++) {
+                    Resolutions_Lbl.Content += domainReport.Resolutions[i].IPAddress + " (" + domainReport.Resolutions[i].LastResolved + ")" + "\n";
+                }
+            }
+
+            if (domainReport.WebutationDomainInfo.SafetyScore > 50)
             {
                 DomainScorePanel.Background = System.Windows.Media.Brushes.LightGreen;
                 DomainScore_Lbl.Content = "(Safe)";
                 DomainScore_Icon.Source = safeIcon;
-            } else
-            {
+            } else {
                 DomainScorePanel.Background = System.Windows.Media.Brushes.Red;
                 DomainScore_Lbl.Content = "(Dangerous)";
                 DomainScore_Icon.Source = dangerIcon;
@@ -83,7 +93,7 @@ namespace VTHelper
                 DomainReportURLDetectedURL_Lbl.Content = domainReport.DetectedUrls[0].Url;
                 DomainRowDetectedURL.Height = new GridLength(1, GridUnitType.Auto);
             } else {
-                DomainRowDetectedURL.Height = new GridLength(1, GridUnitType.Pixel);
+                DomainRowDetectedURL.Height = new GridLength(0, GridUnitType.Pixel);
             }
 
             if (domainReport.DetectedDownloadedSamples.Count > 0)
@@ -93,7 +103,7 @@ namespace VTHelper
                 DomainReportDownloadSamplesDate_Lbl.Content = domainReport.DetectedDownloadedSamples[0].Date;
                 DomainRowDetectedDownload.Height = new GridLength(1, GridUnitType.Auto);
             } else {
-                DomainRowDetectedDownload.Height = new GridLength(1, GridUnitType.Pixel);
+                DomainRowDetectedDownload.Height = new GridLength(0, GridUnitType.Pixel);
             }
 
             if(domainReport.UndetectedUrls.Count > 0)
@@ -103,7 +113,7 @@ namespace VTHelper
                 DomainReportURLUndetectedDate_Lbl.Content = domainReport.UndetectedUrls[0][4];
                 DomainRowUndetectedURL.Height = new GridLength(1, GridUnitType.Auto);
             } else {
-                DomainRowDetectedDownload.Height = new GridLength(1, GridUnitType.Pixel);
+                DomainRowDetectedDownload.Height = new GridLength(0, GridUnitType.Pixel);
             }
 
             if(domainReport.UndetectedDownloadedSamples.Count > 0)
@@ -113,7 +123,7 @@ namespace VTHelper
                 DomainReportUndetectedDownloadSamplesDate_Lbl.Content = domainReport.UndetectedDownloadedSamples[0].Date;
                 DomainRowUndetectedDownload.Height = new GridLength(1, GridUnitType.Auto);
             } else {
-                DomainRowUndetectedDownload.Height = new GridLength(1, GridUnitType.Pixel);
+                DomainRowUndetectedDownload.Height = new GridLength(0, GridUnitType.Pixel);
             }
         }
         /// <summary>

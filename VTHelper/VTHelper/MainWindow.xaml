@@ -13,7 +13,7 @@
         <!-- /////////////////////////////////// -->
         <!-- ////// SCAN DOMAIN START ////////// -->
         <!-- /////////////////////////////////// -->
-        <StackPanel HorizontalAlignment="Stretch" Margin="159,0,0,0" Name="ScanDomain_Panel">
+        <StackPanel HorizontalAlignment="Stretch" Margin="159,0,0,0" Name="ScanDomain_Panel" Visibility="Hidden">
             <StackPanel Orientation="Horizontal" Background="DimGray" Width="Auto" Height="64">
                 <Label></Label>
                 <Image Source="pack://siteoforigin:,,,/Resources/256_domain.png" Width="48"></Image>
@@ -52,9 +52,14 @@
                 </StackPanel>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Height="0"  Width="355" Name="DomainPermlinkPanel" Visibility="Hidden">
-                <Label Content="Permlink:" />
-                <Label Name="DomainScanPermlink_Lbl" />
+            <StackPanel Height="82" Name="DomainPermlinkPanel" HorizontalAlignment="Stretch" Visibility="Collapsed">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuColorKey}}"/>
+                </StackPanel.Background>
+                <StackPanel Orientation="Vertical" Height="82" Width="200" HorizontalAlignment="Center">
+                    <Label Content="Permlink:" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" />
+                    <Label Name="DomainScanPermlink_Lbl" Content="(Unknown)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
             </StackPanel>
 
             <StackPanel Height="82" Name="DomainScorePanel" HorizontalAlignment="Stretch">
@@ -69,7 +74,7 @@
             </StackPanel>
 
             <ScrollViewer Height="230" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <StackPanel HorizontalAlignment="Stretch">
+                <StackPanel HorizontalAlignment="Stretch" Name="DomainDetails_Stack" Visibility="Collapsed">
                     <Label Content="Webutation Domain Info:">
                         <Label.Background>
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
@@ -82,7 +87,7 @@
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
                         </Label.Background>
                     </Label>
-                    <TextBox  Name="WHOIS_Lbl">
+                    <TextBox Name="WHOIS_Lbl">
                         <TextBox.Background>
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightLightColorKey}}"/>
                         </TextBox.Background>
@@ -95,19 +100,40 @@
                         </TextBox.Style>
                     </TextBox>
 
-                    <Label Content="Resolutions:">
-                        <Label.Background>
-                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
-                        </Label.Background>
-                    </Label>
-                    <Label Name="Resolutions_Lbl"/>
-
                     <Label Content="Alexa Domain Info:">
                         <Label.Background>
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
                         </Label.Background>
                     </Label>
                     <Label Name="AlexaDomainInfo_Lbl"/>
+
+                    <Label Content="BitDefender domain info">
+                        <Label.Background>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                        </Label.Background>
+                    </Label>
+                    <Label Name="BitDefenderDomainInfo_Lbl"/>
+
+                    <Label Content="Dr.Web category:">
+                        <Label.Background>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                        </Label.Background>
+                    </Label>
+                    <Label Name="DrWebCategory_Lbl"/>
+                    
+                    <Label Content="Opera domain info:">
+                        <Label.Background>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                        </Label.Background>
+                    </Label>
+                    <Label Name="OperaDomainInfo_Lbl"/>
+
+                    <Label Content="TrendMicro Category:">
+                        <Label.Background>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                        </Label.Background>
+                    </Label>
+                    <Label Name="TrendMicroCategory_Lbl"/>
 
                     <Label Content="Force point threat seeker category:">
                         <Label.Background>
@@ -122,69 +148,76 @@
                         </Label.Background>
                     </Label>
                     <Label Name="Subdomains_Lbl"/>
+
+                    <Label Content="Detection report:">
+                        <Label.Background>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                        </Label.Background>
+                    </Label>
+
+                    <Grid ShowGridLines="True" Name="DetectionReport_Grid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="210" />
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Name="DomainRowDetectedURL" Height="Auto" />
+                            <RowDefinition Name="DomainRowDetectedDownload" Height="Auto" />
+                            <RowDefinition Name="DomainRowUndetectedURL" Height="Auto" />
+                            <RowDefinition Name="DomainRowUndetectedDownload" Height="30" />
+                        </Grid.RowDefinitions>
+
+                        <Label Content="Type" Grid.Row="1" Grid.Column="0" FontWeight="Bold"/>
+                        <Label Content="Detected" Grid.Row="1" Grid.Column="1" FontWeight="Bold"/>
+                        <Label Content="Total" Grid.Row="1" Grid.Column="2" FontWeight="Bold"/>
+                        <Label Content="Scan date" Grid.Row="1" Grid.Column="3" FontWeight="Bold"/>
+                        <Label Content="Link" Grid.Row="1" Grid.Column="4" FontWeight="Bold"/>
+
+                        <Label Content="Detected URLs:" Grid.Row="2" Grid.Column="0"/>
+                        <Label Name="DomainReportURLDetectedPositives_Lbl" Content="0" Grid.Row="2" Grid.Column="1"/>
+                        <Label Name="DomainReportURLDetectedTotalEngines_Lbl" Content="0" Grid.Row="2" Grid.Column="2"/>
+                        <Label Name="DomainReportURLDetectedDate_Lbl" Grid.Row="2" Grid.Column="3"/>
+                        <Label Name="DomainReportURLDetectedURL_Lbl" Grid.Row="2" Grid.Column="4"/>
+
+                        <Label Content="Detected download samples:" Grid.Row="3" Grid.Column="0"/>
+                        <Label Name="DomainReportDownloadSamplesPosisives_Lbl" Content="0" Grid.Row="3" Grid.Column="1"/>
+                        <Label Name="DomainReportDownloadSamplesTotal_Lbl" Content="0" Grid.Row="3" Grid.Column="2"/>
+                        <Label Name="DomainReportDownloadSamplesDate_Lbl" Grid.Row="3" Grid.Column="3"/>
+                        <Label Grid.Row="3" Grid.Column="4">
+                            <Hyperlink Name="DomainReportDownloadSamplesLink" Click="DomainReportDownloadSamplesLink_Click">Link</Hyperlink>
+                        </Label>
+
+                        <Label Content="Undetected URLs:" Grid.Row="4" Grid.Column="0"/>
+                        <Label Name="DomainReportURLUndetectedPositives_Lbl" Content="0" Grid.Row="4" Grid.Column="1"/>
+                        <Label Name="DomainReportURLUndetectedTotalEngines_Lbl" Content="0" Grid.Row="4" Grid.Column="2"/>
+                        <Label Name="DomainReportURLUndetectedDate_Lbl" Grid.Row="4" Grid.Column="3"/>
+                        <Label Grid.Row="4" Grid.Column="4">
+                            <Hyperlink Name="DomainReportURLUndetectedLink" Click="DomainReportURLUndetectedLink_Click">Link</Hyperlink>
+                        </Label>
+
+                        <Label Content="Undetected download samples:" Grid.Row="5" Grid.Column="0"/>
+                        <Label Name="DomainReportUndetectedDownloadSamplesPosisives_Lbl" Content="0" Grid.Row="5" Grid.Column="1"/>
+                        <Label Name="DomainReportUndetectedDownloadSamplesTotal_Lbl" Content="0" Grid.Row="5" Grid.Column="2"/>
+                        <Label Name="DomainReportUndetectedDownloadSamplesDate_Lbl" Grid.Row="5" Grid.Column="3"/>
+                        <Label Grid.Row="5" Grid.Column="4">
+                            <Hyperlink Name="DomainReportUndetectedDownloadSamplesLink" Click="DomainReportUndetectedDownloadSamplesLink_Click">Link</Hyperlink>
+                        </Label>
+                    </Grid>
+
+                    <Label Content="Resolutions:">
+                        <Label.Background>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                        </Label.Background>
+                    </Label>
+                    <Label Name="Resolutions_Lbl"/>
+                    
                 </StackPanel>
             </ScrollViewer>
-
-            <TabControl Background="{x:Null}">
-                <TabItem Header="General">
-                    <ScrollViewer Height="230" HorizontalScrollBarVisibility="Visible" 
-                                  VerticalScrollBarVisibility="Visible" CanContentScroll="True">
-                        <Grid ShowGridLines="True">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="210" />
-                                <ColumnDefinition Width="70" />
-                                <ColumnDefinition Width="70" />
-                                <ColumnDefinition Width="120" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Name="DomainRowDetectedURL" Height="Auto" />
-                                <RowDefinition Name="DomainRowDetectedDownload" Height="Auto" />
-                                <RowDefinition Name="DomainRowUndetectedURL" Height="Auto" />
-                                <RowDefinition Name="DomainRowUndetectedDownload" Height="Auto" />
-                            </Grid.RowDefinitions>
-
-                            <Label Content="Type" Grid.Row="1" Grid.Column="0" FontWeight="Bold"/>
-                            <Label Content="Detected" Grid.Row="1" Grid.Column="1" FontWeight="Bold"/>
-                            <Label Content="Total" Grid.Row="1" Grid.Column="2" FontWeight="Bold"/>
-                            <Label Content="Scan date" Grid.Row="1" Grid.Column="3" FontWeight="Bold"/>
-                            <Label Content="Link" Grid.Row="1" Grid.Column="4" FontWeight="Bold"/>
-
-                            <Label Content="Detected URLs:" Grid.Row="2" Grid.Column="0"/>
-                            <Label Name="DomainReportURLDetectedPositives_Lbl" Content="0" Grid.Row="2" Grid.Column="1"/>
-                            <Label Name="DomainReportURLDetectedTotalEngines_Lbl" Content="0" Grid.Row="2" Grid.Column="2"/>
-                            <Label Name="DomainReportURLDetectedDate_Lbl" Grid.Row="2" Grid.Column="3"/>
-                            <Label Name="DomainReportURLDetectedURL_Lbl" Grid.Row="2" Grid.Column="4"/>
-
-                            <Label Content="Detected download samples:" Grid.Row="3" Grid.Column="0"/>
-                            <Label Name="DomainReportDownloadSamplesPosisives_Lbl" Content="0" Grid.Row="3" Grid.Column="1"/>
-                            <Label Name="DomainReportDownloadSamplesTotal_Lbl" Content="0" Grid.Row="3" Grid.Column="2"/>
-                            <Label Name="DomainReportDownloadSamplesDate_Lbl" Grid.Row="3" Grid.Column="3"/>
-                            <Label Grid.Row="3" Grid.Column="4">
-                                <Hyperlink Name="DomainReportDownloadSamplesLink" Click="DomainReportDownloadSamplesLink_Click">Link</Hyperlink>
-                            </Label>
-
-                            <Label Content="Undetected URLs:" Grid.Row="4" Grid.Column="0"/>
-                            <Label Name="DomainReportURLUndetectedPositives_Lbl" Content="0" Grid.Row="4" Grid.Column="1"/>
-                            <Label Name="DomainReportURLUndetectedTotalEngines_Lbl" Content="0" Grid.Row="4" Grid.Column="2"/>
-                            <Label Name="DomainReportURLUndetectedDate_Lbl" Grid.Row="4" Grid.Column="3"/>
-                            <Label Grid.Row="4" Grid.Column="4">
-                                <Hyperlink Name="DomainReportURLUndetectedLink" Click="DomainReportURLUndetectedLink_Click">Link</Hyperlink>
-                            </Label>
-
-                            <Label Content="Undetected download samples:" Grid.Row="5" Grid.Column="0"/>
-                            <Label Name="DomainReportUndetectedDownloadSamplesPosisives_Lbl" Content="0" Grid.Row="5" Grid.Column="1"/>
-                            <Label Name="DomainReportUndetectedDownloadSamplesTotal_Lbl" Content="0" Grid.Row="5" Grid.Column="2"/>
-                            <Label Name="DomainReportUndetectedDownloadSamplesDate_Lbl" Grid.Row="5" Grid.Column="3"/>
-                            <Label Grid.Row="5" Grid.Column="4">
-                                <Hyperlink Name="DomainReportUndetectedDownloadSamplesLink" Click="DomainReportUndetectedDownloadSamplesLink_Click">Link</Hyperlink>
-                            </Label>
-                        </Grid>
-                    </ScrollViewer>
-                </TabItem>
-            </TabControl>
         </StackPanel>
         <!-- ///////////////////////////////// -->
         <!-- ////// SCAN DOMAIN END ////////// -->
@@ -193,46 +226,95 @@
         <!-- /////////////////////////////// -->
         <!-- ////// SCAN IP START ////////// -->
         <!-- /////////////////////////////// -->
-        <StackPanel HorizontalAlignment="Left" Width="534" Margin="149,0,0,0" Name="ScanIP_Panel" Visibility="Hidden">
-            <StackPanel Orientation="Horizontal" Background="DimGray" Height="64">
+        <StackPanel HorizontalAlignment="Stretch" Margin="159,0,0,0" Name="ScanIP_Panel">
+            <StackPanel Orientation="Horizontal" Background="DimGray" Width="Auto" Height="64">
                 <Label></Label>
                 <Image Source="pack://siteoforigin:,,,/Resources/256_domain.png" Width="48"></Image>
-                <Label Content="Scan IP" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Content="Scan IP" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Width="450" Height="70">
-                <Label  Content="IP:" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                <TextBox Name="IP_TextBox"  TextWrapping="Wrap" Height="28" Width="350" 
+
+            <StackPanel HorizontalAlignment="Stretch">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                </StackPanel.Background>
+                <StackPanel Orientation="Horizontal" Width="520" Height="60" >
+                    <Label  Content="IP:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <TextBox Name="IP_TextBox"  TextWrapping="Wrap" Height="28" Width="450"
                          HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" TextAlignment="Center"/>
-                <Label Width="10"></Label>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="50" Width="310">
-                <Button Height="32"  Width="155" Click="ScanDomainBtn_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
-                        <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Scan IP</Label>
-                    </StackPanel>
-                </Button>
-                <Button Height="32"  Width="155" Click="GetIPReportBtn_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://siteoforigin:,,,/Resources/256_flle_report.png" Width="32"/>
-                        <Label Width="110" HorizontalAlignment="Center" VerticalAlignment="Center">Get IP report</Label>
-                    </StackPanel>
-                </Button>
+                    <Label Width="10"></Label>
+                </StackPanel>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Height="32"  Width="355">
-                <Label Content="Permlink:" Grid.Row="2" Grid.Column="0"/>
-                <Label Name="IPScanPermlink_Lbl" Grid.Row="2" Grid.Column="1"/>
+            <StackPanel Height="50" HorizontalAlignment="Stretch">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                </StackPanel.Background>
+
+                <StackPanel Orientation="Horizontal" Width="310">
+                    <Button Height="32"  Width="155" Click="ScanDomainBtn_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
+                            <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Scan IP</Label>
+                        </StackPanel>
+                    </Button>
+                    <Button Height="32"  Width="155" Click="GetIPReportBtn_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="pack://siteoforigin:,,,/Resources/256_flle_report.png" Width="32"/>
+                            <Label Width="110" HorizontalAlignment="Center" VerticalAlignment="Center">Get IP report</Label>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
             </StackPanel>
 
-            <TabControl Width="490">
-                <TabItem Header="General">
-                    <Grid>
+            <StackPanel Height="82" Name="IPPermlinkPanel" HorizontalAlignment="Stretch" Visibility="Collapsed">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuColorKey}}"/>
+                </StackPanel.Background>
+                <StackPanel Orientation="Vertical" Height="82" Width="200" HorizontalAlignment="Center">
+                    <Label Content="Permlink:" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" />
+                    <Label Name="IPScanPermlink_Lbl" Content="(Unknown)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Height="82" Name="IPScorePanel" HorizontalAlignment="Stretch">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuColorKey}}"/>
+                </StackPanel.Background>
+                <StackPanel Orientation="Vertical" Height="82" Width="200" HorizontalAlignment="Center">
+                    <Label Content="IP safety:" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" />
+                    <Image Name="IPScore_Icon" Source="pack://siteoforigin:,,,/Resources/256_warning.png" Width="32"/>
+                    <Label Name="IPScore_Lbl" Content="(Unknown)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+
+            <ScrollViewer Height="230" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel HorizontalAlignment="Stretch" Name="IPDetails_Stack">
+                    <Label Content="IP Country:">
+                        <Label.Background>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                        </Label.Background>
+                    </Label>
+                    <Label Name="IPCountry_Lbl"/>
+
+                    <Label Content="IP Owner:">
+                        <Label.Background>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                        </Label.Background>
+                    </Label>
+                    <Label Name="IPOwner_Lbl"/>
+
+                    <Label Content="Detection report:">
+                        <Label.Background>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                        </Label.Background>
+                    </Label>
+
+                    <Grid ShowGridLines="True" >
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="220" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="210" />
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="120" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -279,29 +361,8 @@
                             <Hyperlink Name="IPReportUndetectedDownloadSamplesLink" Click="IPReportUndetectedDownloadSamplesLink_Click">Link</Hyperlink>
                         </Label>
                     </Grid>
-                </TabItem>
-                <TabItem Header="Details">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="220" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-
-                        <Label Content="IP Country:" Grid.Row="0" Grid.Column="0"/>
-                        <Label Name="IPCountry_Lbl" Grid.Row="0" Grid.Column="1"/>
-
-                        <Label Content="IP Owner:" Grid.Row="1" Grid.Column="0"/>
-                        <Label Name="IPOwner_Lbl" Grid.Row="1" Grid.Column="1"/>
-                    </Grid>
-                </TabItem>
-            </TabControl>
+                </StackPanel>
+            </ScrollViewer>
         </StackPanel>
         <!-- ///////////////////////////// -->
         <!-- ////// SCAN IP END ////////// -->
@@ -310,13 +371,18 @@
         <!-- ///////////////////////////// -->
         <!-- ////// SCAN URL START /////// -->
         <!-- ///////////////////////////// -->
-        <StackPanel HorizontalAlignment="Left" Width="534" Margin="149,0,0,0" Name="ScanURL_Panel" Visibility="Hidden">
+        <StackPanel HorizontalAlignment="Stretch" Margin="159,0,0,0" Name="ScanURL_Panel" Visibility="Hidden">
             <StackPanel Orientation="Horizontal" Background="DimGray" Height="64">
                 <Label></Label>
                 <Image Source="pack://siteoforigin:,,,/Resources/256_domain.png" Width="48"></Image>
                 <Label Content="Scan URL" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Width="450" Height="70">
+
+            <StackPanel Orientation="Horizontal" Width="520" Height="60">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                </StackPanel.Background>
+                
                 <Label  Content="URL:" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <TextBox Name="URL_TextBox"  TextWrapping="Wrap" Height="28" Width="350" 
                          HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" TextAlignment="Center"/>
