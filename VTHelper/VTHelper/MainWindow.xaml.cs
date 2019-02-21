@@ -216,11 +216,20 @@ namespace VTHelper
             IPCountry_Lbl.Content = ipReport.Country;
             IPOwner_Lbl.Content = ipReport.AsOwner;
 
+            if (ipReport.Resolutions.Count > 0)
+            {
+                for (int i = 0; i < ipReport.Resolutions.Count; i++)
+                {
+                    IPResolutions_Lbl.Content += ipReport.Resolutions[i].Hostname + " (" + ipReport.Resolutions[i].LastResolved + ")" + "\n";
+                }
+            }
+
             if (ipReport.DetectedUrls.Count > 0)
             {
                 IPReportURLDetectedPositives_Lbl.Content = ipReport.DetectedUrls[0].Positives;
                 IPReportURLDetectedTotalEngines_Lbl.Content = ipReport.DetectedUrls[0].Total;
                 IPReportURLDetectedDate_Lbl.Content = ipReport.DetectedUrls[0].ScanDate;
+                IPReportURLDetectedURL_Lbl.Content = ipReport.DetectedUrls[0].Url;
             }
 
             if (ipReport.DetectedDownloadedSamples.Count > 0)
@@ -243,6 +252,8 @@ namespace VTHelper
                 IPReportURLUndetectedTotalEngines_Lbl.Content = ipReport.UndetectedUrls[0][3];
                 IPReportURLUndetectedDate_Lbl.Content = ipReport.UndetectedUrls[0][4];
             }
+
+            IPDetails_Stack.Visibility = Visibility.Visible;
         }
         
         private void GetDomainReportBtn_Click(object sender, RoutedEventArgs e)
@@ -411,6 +422,11 @@ namespace VTHelper
             string link = String.Concat(fileScanLinkStart, hash, urlScanLinkEnd);
 
             System.Diagnostics.Process.Start(link);
+        }
+
+        private void URLReportFileScanLink_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

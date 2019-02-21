@@ -142,13 +142,6 @@
                     </Label>
                     <Label Name="ForcePointDomainCat_Lbl"/>
 
-                    <Label Content="Subdomains:">
-                        <Label.Background>
-                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
-                        </Label.Background>
-                    </Label>
-                    <Label Name="Subdomains_Lbl"/>
-
                     <Label Content="Detection report:">
                         <Label.Background>
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
@@ -209,6 +202,13 @@
                         </Label>
                     </Grid>
 
+                    <Label Content="Subdomains:">
+                        <Label.Background>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                        </Label.Background>
+                    </Label>
+                    <Label Name="Subdomains_Lbl"/>
+
                     <Label Content="Resolutions:">
                         <Label.Background>
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
@@ -226,10 +226,10 @@
         <!-- /////////////////////////////// -->
         <!-- ////// SCAN IP START ////////// -->
         <!-- /////////////////////////////// -->
-        <StackPanel HorizontalAlignment="Stretch" Margin="159,0,0,0" Name="ScanIP_Panel">
+        <StackPanel HorizontalAlignment="Stretch" Margin="159,0,0,0" Name="ScanIP_Panel" Visibility="Hidden">
             <StackPanel Orientation="Horizontal" Background="DimGray" Width="Auto" Height="64">
                 <Label></Label>
-                <Image Source="pack://siteoforigin:,,,/Resources/256_domain.png" Width="48"></Image>
+                <Image Source="pack://siteoforigin:,,,/Resources/256_ip.png" Width="48"></Image>
                 <Label Content="Scan IP" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
             </StackPanel>
 
@@ -288,7 +288,7 @@
             </StackPanel>
 
             <ScrollViewer Height="230" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <StackPanel HorizontalAlignment="Stretch" Name="IPDetails_Stack">
+                <StackPanel HorizontalAlignment="Stretch" Name="IPDetails_Stack" Visibility="Collapsed">
                     <Label Content="IP Country:">
                         <Label.Background>
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
@@ -336,6 +336,7 @@
                         <Label Name="IPReportURLDetectedPositives_Lbl" Content="0" Grid.Row="2" Grid.Column="1"/>
                         <Label Name="IPReportURLDetectedTotalEngines_Lbl" Content="0" Grid.Row="2" Grid.Column="2"/>
                         <Label Name="IPReportURLDetectedDate_Lbl" Grid.Row="2" Grid.Column="3"/>
+                        <Label Name="IPReportURLDetectedURL_Lbl" Grid.Row="2" Grid.Column="4"/>
 
                         <Label Content="Detected download samples:" Grid.Row="3" Grid.Column="0"/>
                         <Label Name="IPReportDownloadSamplesPosisives_Lbl" Content="0" Grid.Row="3" Grid.Column="1"/>
@@ -361,6 +362,13 @@
                             <Hyperlink Name="IPReportUndetectedDownloadSamplesLink" Click="IPReportUndetectedDownloadSamplesLink_Click">Link</Hyperlink>
                         </Label>
                     </Grid>
+
+                    <Label Content="IP resolutions:">
+                        <Label.Background>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                        </Label.Background>
+                    </Label>
+                    <Label Name="IPResolutions_Lbl"/>
                 </StackPanel>
             </ScrollViewer>
         </StackPanel>
@@ -371,51 +379,92 @@
         <!-- ///////////////////////////// -->
         <!-- ////// SCAN URL START /////// -->
         <!-- ///////////////////////////// -->
-        <StackPanel HorizontalAlignment="Stretch" Margin="159,0,0,0" Name="ScanURL_Panel" Visibility="Hidden">
+        <StackPanel HorizontalAlignment="Stretch" Margin="159,0,0,0" Name="ScanURL_Panel">
             <StackPanel Orientation="Horizontal" Background="DimGray" Height="64">
                 <Label></Label>
                 <Image Source="pack://siteoforigin:,,,/Resources/256_domain.png" Width="48"></Image>
                 <Label Content="Scan URL" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Width="520" Height="60">
+            <StackPanel HorizontalAlignment="Stretch">
                 <StackPanel.Background>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
                 </StackPanel.Background>
-                
-                <Label  Content="URL:" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                <TextBox Name="URL_TextBox"  TextWrapping="Wrap" Height="28" Width="350" 
+
+                <StackPanel Orientation="Horizontal" Width="520" Height="60" >
+                    <Label  Content="URL:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <TextBox Name="URL_TextBox"  TextWrapping="Wrap" Height="28" Width="450" 
                          HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" TextAlignment="Center"/>
-                <Label Width="10"></Label>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="50" Width="310">
-                <Button Height="32"  Width="155" Click="ScanURLBtn_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
-                        <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Scan URL</Label>
-                    </StackPanel>
-                </Button>
-                <Button Height="32"  Width="155" Click="GetURLReportBtn_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://siteoforigin:,,,/Resources/256_flle_report.png" Width="32"/>
-                        <Label Width="110" HorizontalAlignment="Center" VerticalAlignment="Center">Get URL report</Label>
-                    </StackPanel>
-                </Button>
+                    <Label Width="10"></Label>
+                </StackPanel>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Height="32"  Width="355">
-                <Label Content="Permlink:" Grid.Row="2" Grid.Column="0"/>
-                <Label Name="URLScanPermlink_Lbl" Grid.Row="2" Grid.Column="1"/>
+            <StackPanel Height="50" HorizontalAlignment="Stretch">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                </StackPanel.Background>
+
+                <StackPanel Orientation="Horizontal" Width="310">
+                    <Button Height="32"  Width="155" Click="ScanURLBtn_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
+                            <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Scan URL</Label>
+                        </StackPanel>
+                    </Button>
+                    <Button Height="32"  Width="155" Click="GetURLReportBtn_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="pack://siteoforigin:,,,/Resources/256_flle_report.png" Width="32"/>
+                            <Label Width="110" HorizontalAlignment="Center" VerticalAlignment="Center">Get URL report</Label>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
             </StackPanel>
 
-            <TabControl Width="490">
-                <TabItem Header="General">
-                    <Grid>
+            <StackPanel Height="82" Name="URLPermlinkPanel" HorizontalAlignment="Stretch" Visibility="Collapsed">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuColorKey}}"/>
+                </StackPanel.Background>
+                <StackPanel Orientation="Vertical" Height="82" Width="200" HorizontalAlignment="Center">
+                    <Label Content="Permlink:" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" />
+                    <Label Name="URLScanPermlink_Lbl" Content="(Unknown)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Height="82" Name="URLScorePanel" HorizontalAlignment="Stretch">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuColorKey}}"/>
+                </StackPanel.Background>
+                <StackPanel Orientation="Vertical" Height="82" Width="200" HorizontalAlignment="Center">
+                    <Label Content="URL safety:" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" />
+                    <Image Name="URLScore_Icon" Source="pack://siteoforigin:,,,/Resources/256_warning.png" Width="32"/>
+                    <Label Name="URLScore_Lbl" Content="(Unknown)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+
+            <ScrollViewer Height="230" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel HorizontalAlignment="Stretch" Name="URLDetails_Stack">
+                    <Label Content="File scan link:">
+                        <Label.Background>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                        </Label.Background>
+                    </Label>
+
+                    <Label>
+                        <Hyperlink Name="URLReportFileScanLink" Click="URLReportFileScanLink_Click">Link</Hyperlink>
+                    </Label>
+
+                    <Label Content="Detection report:">
+                        <Label.Background>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                        </Label.Background>
+                    </Label>
+
+                    <Grid ShowGridLines="True" >
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="220" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="210" />
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="120" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -438,23 +487,8 @@
                         <Label Name="URLReportURLDetectedTotalEngines_Lbl" Content="0" Grid.Row="2" Grid.Column="2"/>
                         <Label Name="URLReportURLDetectedDate_Lbl" Grid.Row="2" Grid.Column="3"/>
                     </Grid>
-                </TabItem>
-                <TabItem Header="Details">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="220" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                    </Grid>
-                </TabItem>
-            </TabControl>
+                </StackPanel>
+            </ScrollViewer>
         </StackPanel>
         <!-- /////////////////////////// -->
         <!-- ////// SCAN URL END /////// -->
@@ -463,13 +497,14 @@
         <!-- ///////////////////////////// -->
         <!-- ////// ABOUT START ////////// -->
         <!-- ///////////////////////////// -->
-        <StackPanel HorizontalAlignment="Left" Width="534" Margin="149,0,0,0" Name="About_Panel" Visibility="Hidden">
+        <StackPanel HorizontalAlignment="Stretch" Margin="159,0,0,0" Name="About_Panel" Visibility="Hidden">
             <StackPanel Orientation="Horizontal" Background="DimGray" Height="64">
                 <Label></Label>
                 <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="48" Height="48"></Image>
                 <Label Content="About" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="100" Width="310">
+                <Label>Author: Artur Fogiel</Label>
             </StackPanel>
         </StackPanel>
         <!-- /////////////////////////// -->
@@ -479,13 +514,14 @@
         <!-- //////////////////////////////// -->
         <!-- ////// SETTINGS START ////////// -->
         <!-- //////////////////////////////// -->
-        <StackPanel HorizontalAlignment="Left" Width="534" Margin="149,0,0,0" Name="Settings_Panel" Visibility="Hidden">
+        <StackPanel HorizontalAlignment="Stretch" Margin="159,0,0,0" Name="Settings_Panel" Visibility="Hidden">
             <StackPanel Orientation="Horizontal" Background="DimGray" Height="64">
                 <Label></Label>
                 <Image Source="pack://siteoforigin:,,,/Resources/256_settings.png" Width="48" Height="48"></Image>
                 <Label Content="Settings" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="100" Width="310">
+                <Label>Language</Label>
                 <ComboBox Text="English">
                     <ComboBoxItem Content="English"></ComboBoxItem>
                     <ComboBoxItem Content="Polski"></ComboBoxItem>
@@ -499,47 +535,109 @@
         <!-- ///////////////////////////////// -->
         <!-- ////// SCAN FILE START ////////// -->
         <!-- ///////////////////////////////// -->
-        <StackPanel HorizontalAlignment="Left" Width="534" Margin="149,0,0,0" Name="ScanFile_Panel" Visibility="Hidden">
-            <StackPanel Orientation="Horizontal" Background="DimGray" Height="64">
+        <StackPanel HorizontalAlignment="Stretch" Margin="159,0,0,0" Name="ScanFile_Panel" Visibility="Hidden">
+            <StackPanel Orientation="Horizontal" Background="DimGray" Width="Auto" Height="64">
                 <Label></Label>
                 <Image Source="pack://siteoforigin:,,,/Resources/256_scan_file.png" Width="48" Height="48"></Image>
                 <Label Content="Scan file" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="70" Width="450">
-                <Label  Content="File:" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                <TextBox Name="FileName_TextBox"  TextWrapping="Wrap" Height="28" Width="350" 
+
+            <StackPanel HorizontalAlignment="Stretch">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                </StackPanel.Background>
+
+                <StackPanel Orientation="Horizontal" Width="520" Height="60" >
+                    <Label  Content="File:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <TextBox Name="FileName_TextBox"  TextWrapping="Wrap" Height="28" Width="350" 
                          HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" TextAlignment="Center"/>
-                <Label Width="10"></Label>
-                <Button Height="20" Content="Select file" Click="SelectFileBtn_Click"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="50" Width="310">
-                <Button Height="32"  Width="155" Click="ScanFileBtn_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
-                        <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Scan file</Label>
-                    </StackPanel>
-                </Button>
-                <Button Height="32"  Width="155" Click="GetFileReportBtn_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://siteoforigin:,,,/Resources/256_flle_report.png" Width="32"/>
-                        <Label Width="110" HorizontalAlignment="Center" VerticalAlignment="Center">Get file report</Label>
-                    </StackPanel>
-                </Button>
+                    <Label Width="10"></Label>
+
+                    <Button Height="32"  Width="155" Click="SelectFileBtn_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
+                            <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Select file</Label>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Height="32"  Width="355">
-                <Label Content="Permlink:" Grid.Row="2" Grid.Column="0"/>
-                <Label Name="FileScanPermlink_Lbl" Grid.Row="2" Grid.Column="1"/>
+            <StackPanel Height="50" HorizontalAlignment="Stretch">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                </StackPanel.Background>
+
+                <StackPanel Orientation="Horizontal" Width="310">
+                    <Button Height="32"  Width="155" Click="ScanFileBtn_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
+                            <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Scan file</Label>
+                        </StackPanel>
+                    </Button>
+                    <Button Height="32"  Width="155" Click="GetFileReportBtn_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="pack://siteoforigin:,,,/Resources/256_flle_report.png" Width="32"/>
+                            <Label Width="110" HorizontalAlignment="Center" VerticalAlignment="Center">Get file report</Label>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
             </StackPanel>
 
-            <TabControl Width="490">
-                <TabItem Header="General">
-                    <Grid>
+            <StackPanel Height="82" Name="FilePermlinkPanel" HorizontalAlignment="Stretch" Visibility="Collapsed">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuColorKey}}"/>
+                </StackPanel.Background>
+                <StackPanel Orientation="Vertical" Height="82" Width="200" HorizontalAlignment="Center">
+                    <Label Content="Permlink:" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" />
+                    <Label Name="FileScanPermlink_Lbl" Content="(Unknown)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Height="82" Name="FileScorePanel" HorizontalAlignment="Stretch">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuColorKey}}"/>
+                </StackPanel.Background>
+                <StackPanel Orientation="Vertical" Height="82" Width="200" HorizontalAlignment="Center">
+                    <Label Content="File safety:" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" />
+                    <Image Name="FileScore_Icon" Source="pack://siteoforigin:,,,/Resources/256_warning.png" Width="32"/>
+                    <Label Name="FileScore_Lbl" Content="(Unknown)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+
+            <ScrollViewer Height="230" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel HorizontalAlignment="Stretch" Name="FileDetails_Stack">
+                    <Label Content="MD5:">
+                        <Label.Background>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                        </Label.Background>
+                    </Label>
+                    <Label Name="FileReportMD5_Lbl"/>
+
+                    <Label Content="SHA1:">
+                        <Label.Background>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                        </Label.Background>
+                    </Label>
+                    <Label Name="FileReportSHA1_Lbl"/>
+
+                    <Label Content="SHA256:">
+                        <Label.Background>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                        </Label.Background>
+                    </Label>
+                    <Label Name="FileReportSHA256_Lbl"/>
+
+                    <Label Content="Detection report:">
+                        <Label.Background>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                        </Label.Background>
+                    </Label>
+                    <Grid ShowGridLines="True">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="220" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="210" />
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="120" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -570,32 +668,8 @@
                         <Label Name="FileReportAV0Update_Lbl" Grid.Row="3" Grid.Column="2"/>
                         <Label Name="FileReportAV0Version_Lbl" Grid.Row="3" Grid.Column="3"/>
                     </Grid>
-                </TabItem>
-                <TabItem Header="Details">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="220" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-
-                        <Label Content="MD5:" Grid.Row="0" Grid.Column="0"/>
-                        <Label Name="FileReportMD5_Lbl" Grid.Row="0" Grid.Column="1"/>
-
-                        <Label Content="SHA256:" Grid.Row="1" Grid.Column="0"/>
-                        <Label Name="FileReportSHA256_Lbl" Grid.Row="1" Grid.Column="1"/>
-
-                        <Label Content="SHA1:" Grid.Row="2" Grid.Column="0"/>
-                        <Label Name="FileReportSHA1_Lbl" Grid.Row="2" Grid.Column="1"/>
-                    </Grid>
-                </TabItem>
-            </TabControl>
+                </StackPanel>
+            </ScrollViewer>
         </StackPanel>
         <!-- /////////////////////////////// -->
         <!-- ////// SCAN FILE END ////////// -->
