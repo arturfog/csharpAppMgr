@@ -515,27 +515,32 @@
 
                 <Label></Label>
                 <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="48" Height="48"></Image>
-                <Label Content="Author: Artur Fogiel" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Content="Author: " Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label HorizontalAlignment="Left" Foreground="White" VerticalAlignment="Center">Artur Fogiel</Label>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="80">
                 <StackPanel.Background>
-                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
                 </StackPanel.Background>
 
                 <Label></Label>
                 <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="48" Height="48"></Image>
-                <Label Content="Version: 0.1.0" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Content="Version: " FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label HorizontalAlignment="Left" Foreground="White" VerticalAlignment="Center">0.1.0</Label>
             </StackPanel>
         
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="80">
                 <StackPanel.Background>
-                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
                 </StackPanel.Background>
 
                 <Label></Label>
                 <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="48" Height="48"></Image>
-                <Label Content="Website:" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Content="Website:" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Hyperlink Name="GithubLink" Click="GithubLink_Click">https://github.com/arturfog/</Hyperlink>
+                </Label>
             </StackPanel>
         </StackPanel>
         <!-- /////////////////////////// -->
@@ -565,8 +570,40 @@
                 </ComboBox>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
-               
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="80">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                </StackPanel.Background>
+
+                <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="48" Height="48"></Image>
+                <Label Height="32" FontSize="14">Directory</Label>
+                <Button Height="32"  Width="155" Click="SelectFileBtn_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
+                        <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Select directory</Label>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Stretch">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+                </StackPanel.Background>
+
+                <StackPanel Orientation="Horizontal" Width="310" Height="48">
+                    <Button Height="32">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
+                            <Label Width="80" HorizontalAlignment="Center" VerticalAlignment="Center">Save</Label>
+                        </StackPanel>
+                    </Button>
+                    <Button Height="32">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
+                            <Label Width="80" HorizontalAlignment="Center" VerticalAlignment="Center">Cancel</Label>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
         <!-- ////////////////////////////// -->

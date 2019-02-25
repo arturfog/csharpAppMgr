@@ -430,5 +430,10 @@ namespace VTHelper
         {
 
         }
+
+        private void GithubLink_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

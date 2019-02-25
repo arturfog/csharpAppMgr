@@ -1,11 +1,7 @@
 version: '0.1.{build}'
 # clone directory
 clone_folder: c:\projects\vthelper
-
-platform:
- - x86
 image: Visual Studio 2015
-
 configuration: Release
 
 before_build:
