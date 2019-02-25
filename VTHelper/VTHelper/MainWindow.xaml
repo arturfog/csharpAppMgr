@@ -17,7 +17,7 @@
             <StackPanel Orientation="Horizontal" Background="DimGray" Width="Auto" Height="64">
                 <Label></Label>
                 <Image Source="pack://siteoforigin:,,,/Resources/256_domain.png" Width="48"></Image>
-                <Label Content="Scan domain" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                <Label Content="Scan domain" FontSize="15" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Stretch">
@@ -62,7 +62,7 @@
                 </StackPanel>
             </StackPanel>
 
-            <StackPanel Height="82" Name="DomainScorePanel" HorizontalAlignment="Stretch">
+            <StackPanel Height="82" Name="DomainScorePanel" HorizontalAlignment="Stretch" Visibility="Collapsed">
                 <StackPanel.Background>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuColorKey}}"/>
                 </StackPanel.Background>
@@ -72,6 +72,8 @@
                     <Label Name="DomainScore_Lbl" Content="(Unknown)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </StackPanel>
             </StackPanel>
+
+            <Image Name="DomainBigPicture" Source="pack://siteoforigin:,,,/Resources/big4.jpg"/>
 
             <ScrollViewer Height="230" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel HorizontalAlignment="Stretch" Name="DomainDetails_Stack" Visibility="Collapsed">
@@ -230,7 +232,7 @@
             <StackPanel Orientation="Horizontal" Background="DimGray" Width="Auto" Height="64">
                 <Label></Label>
                 <Image Source="pack://siteoforigin:,,,/Resources/256_ip.png" Width="48"></Image>
-                <Label Content="Scan IP" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                <Label Content="Scan IP" FontSize="15" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Stretch">
@@ -276,7 +278,7 @@
                 </StackPanel>
             </StackPanel>
 
-            <StackPanel Height="82" Name="IPScorePanel" HorizontalAlignment="Stretch">
+            <StackPanel Height="82" Name="IPScorePanel" HorizontalAlignment="Stretch" Visibility="Collapsed">
                 <StackPanel.Background>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuColorKey}}"/>
                 </StackPanel.Background>
@@ -286,6 +288,8 @@
                     <Label Name="IPScore_Lbl" Content="(Unknown)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </StackPanel>
             </StackPanel>
+
+            <Image Name="IPBigPicture" Source="pack://siteoforigin:,,,/Resources/big3.jpg"/>
 
             <ScrollViewer Height="230" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel HorizontalAlignment="Stretch" Name="IPDetails_Stack" Visibility="Collapsed">
@@ -383,7 +387,7 @@
             <StackPanel Orientation="Horizontal" Background="DimGray" Height="64">
                 <Label></Label>
                 <Image Source="pack://siteoforigin:,,,/Resources/256_domain.png" Width="48"></Image>
-                <Label Content="Scan URL" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Content="Scan URL" Foreground="White" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Stretch">
@@ -501,10 +505,37 @@
             <StackPanel Orientation="Horizontal" Background="DimGray" Height="64">
                 <Label></Label>
                 <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="48" Height="48"></Image>
-                <Label Content="About" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Content="About" FontSize="15" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="100" Width="310">
-                <Label>Author: Artur Fogiel</Label>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="80">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                </StackPanel.Background>
+
+                <Label></Label>
+                <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="48" Height="48"></Image>
+                <Label Content="Author: Artur Fogiel" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="80">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                </StackPanel.Background>
+
+                <Label></Label>
+                <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="48" Height="48"></Image>
+                <Label Content="Version: 0.1.0" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </StackPanel>
+        
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="80">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                </StackPanel.Background>
+
+                <Label></Label>
+                <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="48" Height="48"></Image>
+                <Label Content="Website:" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </StackPanel>
         </StackPanel>
         <!-- /////////////////////////// -->
@@ -518,14 +549,24 @@
             <StackPanel Orientation="Horizontal" Background="DimGray" Height="64">
                 <Label></Label>
                 <Image Source="pack://siteoforigin:,,,/Resources/256_settings.png" Width="48" Height="48"></Image>
-                <Label Content="Settings" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Content="Settings" FontSize="15" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="100" Width="310">
-                <Label>Language</Label>
-                <ComboBox Text="English">
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="80">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                </StackPanel.Background>
+
+                <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="48" Height="48"></Image>
+                <Label Height="32" FontSize="14">Language</Label>
+                <ComboBox SelectedIndex="0" Width="200" Height="30" FontSize="15">
                     <ComboBoxItem Content="English"></ComboBoxItem>
                     <ComboBoxItem Content="Polski"></ComboBoxItem>
                 </ComboBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+               
             </StackPanel>
         </StackPanel>
         <!-- ////////////////////////////// -->
@@ -539,7 +580,7 @@
             <StackPanel Orientation="Horizontal" Background="DimGray" Width="Auto" Height="64">
                 <Label></Label>
                 <Image Source="pack://siteoforigin:,,,/Resources/256_scan_file.png" Width="48" Height="48"></Image>
-                <Label Content="Scan file" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Content="Scan file" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Stretch">

@@ -254,6 +254,8 @@ namespace VTHelper
             }
 
             IPDetails_Stack.Visibility = Visibility.Visible;
+            IPScorePanel.Visibility = Visibility.Visible;
+            IPBigPicture.Visibility = Visibility.Collapsed;
         }
         
         private void GetDomainReportBtn_Click(object sender, RoutedEventArgs e)
