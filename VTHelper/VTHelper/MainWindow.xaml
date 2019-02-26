@@ -16,7 +16,7 @@
         <StackPanel HorizontalAlignment="Stretch" Margin="159,0,0,0" Name="ScanDomain_Panel" Visibility="Hidden">
             <StackPanel Orientation="Horizontal" Background="DimGray" Width="Auto" Height="64">
                 <Label></Label>
-                <Image Source="pack://siteoforigin:,,,/Resources/256_domain.png" Width="48"></Image>
+                <Image Source="pack://siteoforigin:,,,/Resources/domain.png" Width="48"></Image>
                 <Label Content="Scan domain" FontSize="15" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
             </StackPanel>
 
@@ -39,7 +39,7 @@
                 <StackPanel Orientation="Horizontal" Width="310">
                     <Button Height="32"  Width="155" Click="ScanDomainBtn_Click">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
+                            <Image Source="pack://siteoforigin:,,,/Resources/search.png" Width="32"/>
                             <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Scan domain</Label>
                         </StackPanel>
                     </Button>
@@ -75,7 +75,7 @@
 
             <Image Name="DomainBigPicture" Source="pack://siteoforigin:,,,/Resources/big4.jpg"/>
 
-            <ScrollViewer Height="230" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer Height="250" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel HorizontalAlignment="Stretch" Name="DomainDetails_Stack" Visibility="Collapsed">
                     <Label Content="Webutation Domain Info:">
                         <Label.Background>
@@ -255,7 +255,7 @@
                 <StackPanel Orientation="Horizontal" Width="310">
                     <Button Height="32"  Width="155" Click="ScanDomainBtn_Click">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
+                            <Image Source="pack://siteoforigin:,,,/Resources/search.png" Width="32"/>
                             <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Scan IP</Label>
                         </StackPanel>
                     </Button>
@@ -291,7 +291,7 @@
 
             <Image Name="IPBigPicture" Source="pack://siteoforigin:,,,/Resources/big3.jpg"/>
 
-            <ScrollViewer Height="230" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer Height="250" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel HorizontalAlignment="Stretch" Name="IPDetails_Stack" Visibility="Collapsed">
                     <Label Content="IP Country:">
                         <Label.Background>
@@ -386,7 +386,7 @@
         <StackPanel HorizontalAlignment="Stretch" Margin="159,0,0,0" Name="ScanURL_Panel">
             <StackPanel Orientation="Horizontal" Background="DimGray" Height="64">
                 <Label></Label>
-                <Image Source="pack://siteoforigin:,,,/Resources/256_domain.png" Width="48"></Image>
+                <Image Source="pack://siteoforigin:,,,/Resources/url.png" Width="48"></Image>
                 <Label Content="Scan URL" Foreground="White" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </StackPanel>
 
@@ -411,7 +411,7 @@
                 <StackPanel Orientation="Horizontal" Width="310">
                     <Button Height="32"  Width="155" Click="ScanURLBtn_Click">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
+                            <Image Source="pack://siteoforigin:,,,/Resources/search.png" Width="32"/>
                             <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Scan URL</Label>
                         </StackPanel>
                     </Button>
@@ -514,7 +514,7 @@
                 </StackPanel.Background>
 
                 <Label></Label>
-                <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="48" Height="48"></Image>
+                <Image Source="pack://siteoforigin:,,,/Resources/author.png" Width="48" Height="48"></Image>
                 <Label Content="Author: " Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label HorizontalAlignment="Left" Foreground="White" VerticalAlignment="Center">Artur Fogiel</Label>
             </StackPanel>
@@ -525,7 +525,7 @@
                 </StackPanel.Background>
 
                 <Label></Label>
-                <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="48" Height="48"></Image>
+                <Image Source="pack://siteoforigin:,,,/Resources/version.png" Width="48" Height="48"></Image>
                 <Label Content="Version: " FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label HorizontalAlignment="Left" Foreground="White" VerticalAlignment="Center">0.1.0</Label>
             </StackPanel>
@@ -536,7 +536,7 @@
                 </StackPanel.Background>
 
                 <Label></Label>
-                <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="48" Height="48"></Image>
+                <Image Source="pack://siteoforigin:,,,/Resources/github.png" Width="48" Height="48"></Image>
                 <Label Content="Website:" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label HorizontalAlignment="Left" VerticalAlignment="Center">
                     <Hyperlink Name="GithubLink" Click="GithubLink_Click">https://github.com/arturfog/</Hyperlink>
@@ -562,7 +562,7 @@
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
                 </StackPanel.Background>
 
-                <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="48" Height="48"></Image>
+                <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/language.png" Width="48" Height="48"></Image>
                 <Label Height="32" FontSize="14">Language</Label>
                 <ComboBox SelectedIndex="0" Width="200" Height="30" FontSize="15">
                     <ComboBoxItem Content="English"></ComboBoxItem>
@@ -572,14 +572,14 @@
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="80">
                 <StackPanel.Background>
-                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
                 </StackPanel.Background>
 
-                <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="48" Height="48"></Image>
+                <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/folder.png" Width="48" Height="48"></Image>
                 <Label Height="32" FontSize="14">Directory</Label>
                 <Button Height="32"  Width="155" Click="SelectFileBtn_Click">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
+                        <Image Source="pack://siteoforigin:,,,/Resources/folder2.png" Width="32"/>
                         <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Select directory</Label>
                     </StackPanel>
                 </Button>
@@ -593,13 +593,14 @@
                 <StackPanel Orientation="Horizontal" Width="310" Height="48">
                     <Button Height="32">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
+                            <Image Source="pack://siteoforigin:,,,/Resources/save.png" Width="32"/>
                             <Label Width="80" HorizontalAlignment="Center" VerticalAlignment="Center">Save</Label>
                         </StackPanel>
                     </Button>
+                    <Label></Label>
                     <Button Height="32">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
+                            <Image Source="pack://siteoforigin:,,,/Resources/cancel.png" Width="32"/>
                             <Label Width="80" HorizontalAlignment="Center" VerticalAlignment="Center">Cancel</Label>
                         </StackPanel>
                     </Button>
@@ -763,13 +764,13 @@
             </Button>
             <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Click="ScanURLTabBtn_Click">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="pack://siteoforigin:,,,/Resources/256_domain.png" Width="32"/>
+                    <Image Source="pack://siteoforigin:,,,/Resources/url.png" Width="32"/>
                     <Label Width="100" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center">Scan URL</Label>
                 </StackPanel>
             </Button>
             <Button Height="54" Width="159" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Click="ScanDomainTabBtn_Click">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="pack://siteoforigin:,,,/Resources/256_domain.png" Width="32"/>
+                    <Image Source="pack://siteoforigin:,,,/Resources/domain.png" Width="32"/>
                     <Label Width="100" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center">Scan domain</Label>
                 </StackPanel>
             </Button>

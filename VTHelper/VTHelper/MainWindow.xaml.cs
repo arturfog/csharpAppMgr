@@ -65,7 +65,9 @@ namespace VTHelper
             DrWebCategory_Lbl.Content = domainReport.DrWebCategory;
             BitDefenderDomainInfo_Lbl.Content = domainReport.BitDefenderDomainInfo;
 
+            DomainScorePanel.Visibility = Visibility.Visible;
             DomainDetails_Stack.Visibility = Visibility.Visible;
+            DomainBigPicture.Visibility = Visibility.Collapsed;
 
             if (domainReport.Resolutions.Count > 0)
             {
