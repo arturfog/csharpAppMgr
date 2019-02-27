@@ -463,7 +463,7 @@
                         </Label.Background>
                     </Label>
 
-                    <Grid ShowGridLines="True" >
+                    <Grid ShowGridLines="True" Name="URLScan_Grid">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="210" />
                             <ColumnDefinition Width="70" />
@@ -486,10 +486,16 @@
                         <Label Content="Scan date" Grid.Row="1" Grid.Column="3" FontWeight="Bold"/>
                         <Label Content="Link" Grid.Row="1" Grid.Column="4" FontWeight="Bold"/>
 
-                        <Label Content="Detected URLs:" Grid.Row="2" Grid.Column="0"/>
+                        <Label Content="Scan summary:" Grid.Row="2" Grid.Column="0"/>
                         <Label Name="URLReportURLDetectedPositives_Lbl" Content="0" Grid.Row="2" Grid.Column="1"/>
                         <Label Name="URLReportURLDetectedTotalEngines_Lbl" Content="0" Grid.Row="2" Grid.Column="2"/>
                         <Label Name="URLReportURLDetectedDate_Lbl" Grid.Row="2" Grid.Column="3"/>
+                        <Label Grid.Row="2" Grid.Column="4">
+                            <Hyperlink Name="URLReportURLDetectedURLLink" Click="URLReportURLDetectedURLLink_Click">Link</Hyperlink>
+                        </Label>
+                        
+                        <!-- Scan results -->
+                        
                     </Grid>
                 </StackPanel>
             </ScrollViewer>
@@ -563,7 +569,7 @@
                 </StackPanel.Background>
 
                 <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/language.png" Width="48" Height="48"></Image>
-                <Label Height="32" FontSize="14">Language</Label>
+                <Label Height="32" FontSize="14" FontWeight="Bold">Language</Label>
                 <ComboBox SelectedIndex="0" Width="200" Height="30" FontSize="15">
                     <ComboBoxItem Content="English"></ComboBoxItem>
                     <ComboBoxItem Content="Polski"></ComboBoxItem>
@@ -576,8 +582,9 @@
                 </StackPanel.Background>
 
                 <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/folder.png" Width="48" Height="48"></Image>
-                <Label Height="32" FontSize="14">Directory</Label>
-                <Button Height="32"  Width="155" Click="SelectFileBtn_Click">
+                <Label Height="32" FontSize="14" FontWeight="Bold">Directory</Label>
+                <TextBox TextWrapping="Wrap" Height="28" Width="220" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" TextAlignment="Center"/>
+                <Button Margin="10" Height="32"  Width="155" Click="SelectFileBtn_Click">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="pack://siteoforigin:,,,/Resources/folder2.png" Width="32"/>
                         <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Select directory</Label>

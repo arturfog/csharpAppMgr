@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Windows.Media;
 using System.Drawing;
 using System.Windows.Media.Imaging;
+using System.Net;
+using System.Windows.Controls;
 
 namespace VTHelper
 {
@@ -20,6 +22,7 @@ namespace VTHelper
         private UrlReport urlReport;
         private FileReport fileReport;
         private static BitmapImage safeIcon;
+        private static BitmapImage warningIcon;
         private static BitmapImage dangerIcon;
 
         public MainWindow()
@@ -41,6 +44,14 @@ namespace VTHelper
             dangerIcon.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
             dangerIcon.UriSource = new Uri("Resources/256_danger.png", UriKind.Relative);
             dangerIcon.EndInit();
+
+            warningIcon = new BitmapImage();
+            warningIcon.BeginInit();
+            warningIcon.CacheOption = BitmapCacheOption.None;
+            warningIcon.CacheOption = BitmapCacheOption.OnLoad;
+            warningIcon.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            warningIcon.UriSource = new Uri("Resources/256_warning.png", UriKind.Relative);
+            warningIcon.EndInit();
         }
         const string urlScanLinkStart = "https://www.virustotal.com/#/url/";
         const string fileScanLinkStart = "https://www.virustotal.com/#/file/";
@@ -76,11 +87,17 @@ namespace VTHelper
                 }
             }
 
-            if (domainReport.WebutationDomainInfo.SafetyScore > 50)
+            if (domainReport.WebutationDomainInfo.SafetyScore > 80)
             {
                 DomainScorePanel.Background = System.Windows.Media.Brushes.LightGreen;
                 DomainScore_Lbl.Content = "(Safe)";
                 DomainScore_Icon.Source = safeIcon;
+            }
+            else if (domainReport.WebutationDomainInfo.SafetyScore > 60)
+            {
+                DomainScorePanel.Background = System.Windows.Media.Brushes.Orange;
+                DomainScore_Lbl.Content = "(Be carefull)";
+                DomainScore_Icon.Source = warningIcon;
             } else {
                 DomainScorePanel.Background = System.Windows.Media.Brushes.Red;
                 DomainScore_Lbl.Content = "(Dangerous)";
@@ -151,7 +168,7 @@ namespace VTHelper
             UrlReport urlReport = await App.GetUrlReportAsync(url);
         }
         /// <summary>
-        /// 
+        /// URL report
         /// </summary>
         /// <param name="url"></param>
         private async void ParseURLReportAsync(string url)
@@ -162,12 +179,42 @@ namespace VTHelper
             URLReportURLDetectedTotalEngines_Lbl.Content = urlReport.Total;
             URLReportURLDetectedDate_Lbl.Content = urlReport.ScanDate;
 
+            if (urlReport.Positives < 3)
+            {
+                URLScorePanel.Background = System.Windows.Media.Brushes.LightGreen;
+                URLScore_Lbl.Content = "(Safe)";
+                URLScore_Icon.Source = safeIcon;
+            }
+            else if (urlReport.Positives < 5)
+            {
+                URLScorePanel.Background = System.Windows.Media.Brushes.Orange;
+                URLScore_Lbl.Content = "(Be carefull)";
+                URLScore_Icon.Source = warningIcon;
+            }
+            else
+            {
+                URLScorePanel.Background = System.Windows.Media.Brushes.Red;
+                URLScore_Lbl.Content = "(Dangerous)";
+                URLScore_Icon.Source = dangerIcon;
+            }
+
             foreach (var item in urlReport.Scans)
             {
                 if (item.Value.Detected)
                 {
-                    FileReportAV0Name_Lbl.Content = item.Key;
-                    FileReportAV0VirusName_Lbl.Content = item.Value.Result;
+                    System.Windows.Controls.Label name = new System.Windows.Controls.Label();
+                    System.Windows.Controls.Label virus = new System.Windows.Controls.Label();
+                    name.Content = item.Key;
+                    virus.Content = item.Value.Result;
+
+                    name.SetValue(Grid.RowProperty, 0);
+                    name.SetValue(Grid.ColumnProperty, 0);
+
+                    virus.SetValue(Grid.RowProperty, 0);
+                    virus.SetValue(Grid.ColumnProperty, 0);
+
+                    URLScan_Grid.Children.Add(name);
+                    URLScan_Grid.Children.Add(virus);
                 }
             }
         }
@@ -208,17 +255,33 @@ namespace VTHelper
                 }
             }
         }
+        public bool IsValidIPAddress(string addr)
+        {
+            IPAddress address;
+            bool valid = IPAddress.TryParse(addr, out address);
+            return valid;
+        }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="ip"></param>
         private async void ParseIPReportAsync(string ip)
         {
+            bool valid = IsValidIPAddress(ip);
+            if (valid == false)
+            {
+                MessageBoxResult ipInvalidError = MessageBox.Show("Invalid IP address !",
+                                          "Error",
+                                          MessageBoxButton.OK,
+                                          MessageBoxImage.Error);
+                return;
+            }
+
             ipReport = await App.GetIPReportAsync(ip);
             IPCountry_Lbl.Content = ipReport.Country;
             IPOwner_Lbl.Content = ipReport.AsOwner;
 
-            if (ipReport.Resolutions.Count > 0)
+            if (ipReport.Resolutions != null && ipReport.Resolutions.Count > 0)
             {
                 for (int i = 0; i < ipReport.Resolutions.Count; i++)
                 {
@@ -226,33 +289,57 @@ namespace VTHelper
                 }
             }
 
-            if (ipReport.DetectedUrls.Count > 0)
+            int detectedURLPositives = 0;
+            if (ipReport.DetectedUrls != null && ipReport.DetectedUrls.Count > 0)
             {
+                detectedURLPositives = Convert.ToInt32(ipReport.DetectedUrls[0].Positives);
                 IPReportURLDetectedPositives_Lbl.Content = ipReport.DetectedUrls[0].Positives;
                 IPReportURLDetectedTotalEngines_Lbl.Content = ipReport.DetectedUrls[0].Total;
                 IPReportURLDetectedDate_Lbl.Content = ipReport.DetectedUrls[0].ScanDate;
                 IPReportURLDetectedURL_Lbl.Content = ipReport.DetectedUrls[0].Url;
             }
 
-            if (ipReport.DetectedDownloadedSamples.Count > 0)
+            int detectedDownloadPositives = 0;
+            if (ipReport.DetectedDownloadedSamples != null && ipReport.DetectedDownloadedSamples.Count > 0)
             {
+                detectedDownloadPositives = Convert.ToInt32(ipReport.DetectedDownloadedSamples[0].Positives);
                 IPReportDownloadSamplesPosisives_Lbl.Content = ipReport.DetectedDownloadedSamples[0].Positives;
                 IPReportDownloadSamplesTotal_Lbl.Content = ipReport.DetectedDownloadedSamples[0].Total;
                 IPReportDownloadSamplesDate_Lbl.Content = ipReport.DetectedDownloadedSamples[0].Date;
             }
 
-            if (ipReport.UndetectedDownloadedSamples.Count > 0)
+            if (ipReport.UndetectedCommunicatingSamples != null && ipReport.UndetectedDownloadedSamples.Count > 0)
             {
                 IPReportUndetectedDownloadSamplesTotal_Lbl.Content = ipReport.UndetectedDownloadedSamples[0].Total;
                 IPReportUndetectedDownloadSamplesPosisives_Lbl.Content = ipReport.UndetectedDownloadedSamples[0].Positives;
                 IPReportUndetectedDownloadSamplesDate_Lbl.Content = ipReport.UndetectedDownloadedSamples[0].Date;
             }
 
-            if (ipReport.UndetectedUrls.Count > 0)
+            
+            if (ipReport.UndetectedUrls != null && ipReport.UndetectedUrls.Count > 0)
             {
                 IPReportURLUndetectedPositives_Lbl.Content = ipReport.UndetectedUrls[0][2];
                 IPReportURLUndetectedTotalEngines_Lbl.Content = ipReport.UndetectedUrls[0][3];
                 IPReportURLUndetectedDate_Lbl.Content = ipReport.UndetectedUrls[0][4];
+            }
+
+            if (detectedURLPositives < 5 && detectedDownloadPositives < 5)
+            {
+                IPScorePanel.Background = System.Windows.Media.Brushes.LightGreen;
+                IPScore_Lbl.Content = "(Safe)";
+                IPScore_Icon.Source = safeIcon;
+            }
+            else if (detectedURLPositives < 10 && detectedDownloadPositives < 10)
+            {
+                IPScorePanel.Background = System.Windows.Media.Brushes.Orange;
+                IPScore_Lbl.Content = "(Be careful)";
+                IPScore_Icon.Source = warningIcon;
+            }
+            else
+            {
+                IPScorePanel.Background = System.Windows.Media.Brushes.Red;
+                IPScore_Lbl.Content = "(Dangerous)";
+                IPScore_Icon.Source = dangerIcon;
             }
 
             IPDetails_Stack.Visibility = Visibility.Visible;
@@ -430,12 +517,26 @@ namespace VTHelper
 
         private void URLReportFileScanLink_Click(object sender, RoutedEventArgs e)
         {
+            if (urlReport != null)
+            {
+                string hash = urlReport.FileScanId;
+                string link = String.Concat(fileScanLinkStart, hash, urlScanLinkEnd);
 
+                if (hash != null && hash.Length > 0)
+                {
+                    System.Diagnostics.Process.Start(link);
+                }
+            }
         }
 
         private void GithubLink_Click(object sender, RoutedEventArgs e)
         {
+            System.Diagnostics.Process.Start("https://github.com/arturfog/");
+        }
 
+        private void URLReportURLDetectedURLLink_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(urlReport.Permalink);
         }
     }
 }
