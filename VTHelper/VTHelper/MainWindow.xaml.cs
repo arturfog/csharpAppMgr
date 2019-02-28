@@ -173,7 +173,12 @@ namespace VTHelper
         /// <param name="url"></param>
         private async void ParseURLReportAsync(string url)
         {
+            URLScan_Grid.Children.RemoveRange(3, URLScan_Grid.Children.Count - 1);
             urlReport = await App.GetUrlReportAsync(url);
+
+            URLDetails_Stack.Visibility = Visibility.Visible;
+            URLScorePanel.Visibility = Visibility.Visible;
+            URLBigPicture.Visibility = Visibility.Collapsed;
 
             URLReportURLDetectedPositives_Lbl.Content = urlReport.Positives;
             URLReportURLDetectedTotalEngines_Lbl.Content = urlReport.Total;
@@ -198,23 +203,33 @@ namespace VTHelper
                 URLScore_Icon.Source = dangerIcon;
             }
 
+            int row = 2;
             foreach (var item in urlReport.Scans)
             {
                 if (item.Value.Detected)
                 {
                     System.Windows.Controls.Label name = new System.Windows.Controls.Label();
                     System.Windows.Controls.Label virus = new System.Windows.Controls.Label();
+                    System.Windows.Controls.Label detail = new System.Windows.Controls.Label();
+
                     name.Content = item.Key;
                     virus.Content = item.Value.Result;
+                    detail.Content = item.Value.Detail;
 
-                    name.SetValue(Grid.RowProperty, 0);
+                    name.SetValue(Grid.RowProperty, row);
                     name.SetValue(Grid.ColumnProperty, 0);
 
-                    virus.SetValue(Grid.RowProperty, 0);
-                    virus.SetValue(Grid.ColumnProperty, 0);
+                    virus.SetValue(Grid.RowProperty, row);
+                    virus.SetValue(Grid.ColumnProperty, 1);
+
+                    detail.SetValue(Grid.RowProperty, row);
+                    detail.SetValue(Grid.ColumnProperty, 2);
 
                     URLScan_Grid.Children.Add(name);
                     URLScan_Grid.Children.Add(virus);
+                    URLScan_Grid.Children.Add(detail);
+
+                    ++row;
                 }
             }
         }
@@ -240,6 +255,8 @@ namespace VTHelper
             FileReportMD5_Lbl.Content = fileReport.MD5;
             FileReportSHA256_Lbl.Content = fileReport.SHA256;
             FileReportSHA1_Lbl.Content = fileReport.SHA1;
+
+            FileDetails_Stack.Visibility = Visibility.Visible;
 
             FileReportDate_Lbl.Content = fileReport.ScanDate;
             FileReportPositives_Lbl.Content = fileReport.Positives;
@@ -520,10 +537,10 @@ namespace VTHelper
             if (urlReport != null)
             {
                 string hash = urlReport.FileScanId;
-                string link = String.Concat(fileScanLinkStart, hash, urlScanLinkEnd);
-
                 if (hash != null && hash.Length > 0)
                 {
+                    var arr = hash.Split('-');
+                    string link = String.Concat(fileScanLinkStart, arr[0], urlScanLinkEnd);
                     System.Diagnostics.Process.Start(link);
                 }
             }

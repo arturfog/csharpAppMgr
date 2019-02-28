@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VTHelper"
         mc:Ignorable="d"
-        Title="MainWindow" Height="540" Width="700" MinWidth="700" MinHeight="540" MaxHeight="500">
+        Title="C# VTHelper" Height="540" Width="700" MinWidth="700" MinHeight="540" MaxHeight="500">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -434,7 +434,7 @@
                 </StackPanel>
             </StackPanel>
 
-            <StackPanel Height="82" Name="URLScorePanel" HorizontalAlignment="Stretch">
+            <StackPanel Height="82" Name="URLScorePanel" HorizontalAlignment="Stretch" Visibility="Collapsed">
                 <StackPanel.Background>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuColorKey}}"/>
                 </StackPanel.Background>
@@ -445,8 +445,10 @@
                 </StackPanel>
             </StackPanel>
 
+            <Image Name="URLBigPicture" Source="pack://siteoforigin:,,,/Resources/big2.jpg"/>
+
             <ScrollViewer Height="230" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <StackPanel HorizontalAlignment="Stretch" Name="URLDetails_Stack">
+                <StackPanel HorizontalAlignment="Stretch" Name="URLDetails_Stack" Visibility="Collapsed">
                     <Label Content="File scan link:">
                         <Label.Background>
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
@@ -463,7 +465,7 @@
                         </Label.Background>
                     </Label>
 
-                    <Grid ShowGridLines="True" Name="URLScan_Grid">
+                    <Grid ShowGridLines="True">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="210" />
                             <ColumnDefinition Width="70" />
@@ -493,9 +495,48 @@
                         <Label Grid.Row="2" Grid.Column="4">
                             <Hyperlink Name="URLReportURLDetectedURLLink" Click="URLReportURLDetectedURLLink_Click">Link</Hyperlink>
                         </Label>
-                        
-                        <!-- Scan results -->
-                        
+                    </Grid>
+
+                    <Grid ShowGridLines="True" Name="URLScan_Grid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="210" />
+                            <ColumnDefinition Width="140" />
+                            <ColumnDefinition Width="150" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Label Content="Engine" Grid.Row="1" Grid.Column="0" FontWeight="Bold"/>
+                        <Label Content="Malware" Grid.Row="1" Grid.Column="1" FontWeight="Bold"/>
+                        <Label Content="Details" Grid.Row="1" Grid.Column="2" FontWeight="Bold"/>
                     </Grid>
                 </StackPanel>
             </ScrollViewer>
@@ -578,6 +619,16 @@
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="80">
                 <StackPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+                </StackPanel.Background>
+
+                <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/language.png" Width="48" Height="48"></Image>
+                <Label Height="32" FontSize="14" FontWeight="Bold">API key</Label>
+                <TextBox TextWrapping="Wrap" Height="28" Width="220" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" TextAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="80">
+                <StackPanel.Background>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
                 </StackPanel.Background>
 
@@ -641,7 +692,7 @@
 
                     <Button Height="32"  Width="155" Click="SelectFileBtn_Click">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
+                            <Image Source="pack://siteoforigin:,,,/Resources/folder2.png" Width="32"/>
                             <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Select file</Label>
                         </StackPanel>
                     </Button>
@@ -656,7 +707,7 @@
                 <StackPanel Orientation="Horizontal" Width="310">
                     <Button Height="32"  Width="155" Click="ScanFileBtn_Click">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="pack://siteoforigin:,,,/Resources/256_about.png" Width="32"/>
+                            <Image Source="pack://siteoforigin:,,,/Resources/search.png" Width="32"/>
                             <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Scan file</Label>
                         </StackPanel>
                     </Button>
@@ -691,7 +742,7 @@
             </StackPanel>
 
             <ScrollViewer Height="230" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <StackPanel HorizontalAlignment="Stretch" Name="FileDetails_Stack">
+                <StackPanel HorizontalAlignment="Stretch" Name="FileDetails_Stack" Visibility="Collapsed">
                     <Label Content="MD5:">
                         <Label.Background>
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
