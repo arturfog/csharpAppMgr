@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VTHelper"
         mc:Ignorable="d"
-        Title="C# VTHelper" Height="540" Width="700" MinWidth="700" MinHeight="540" MaxHeight="500">
+        Title="C# VTHelper" Height="540" Width="750" MinWidth="750" MinHeight="540" MaxHeight="500">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -535,7 +535,7 @@
                         </Grid.RowDefinitions>
 
                         <Label Content="Engine" Grid.Row="1" Grid.Column="0" FontWeight="Bold"/>
-                        <Label Content="Malware" Grid.Row="1" Grid.Column="1" FontWeight="Bold"/>
+                        <Label Content="Threat" Grid.Row="1" Grid.Column="1" FontWeight="Bold"/>
                         <Label Content="Details" Grid.Row="1" Grid.Column="2" FontWeight="Bold"/>
                     </Grid>
                 </StackPanel>
@@ -610,7 +610,7 @@
                 </StackPanel.Background>
 
                 <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/language.png" Width="48" Height="48"></Image>
-                <Label Height="32" FontSize="14" FontWeight="Bold">Language</Label>
+                <Label Height="32" FontSize="14" FontWeight="Bold" Width="100">Language</Label>
                 <ComboBox SelectedIndex="0" Width="200" Height="30" FontSize="15">
                     <ComboBoxItem Content="English"></ComboBoxItem>
                     <ComboBoxItem Content="Polski"></ComboBoxItem>
@@ -622,9 +622,16 @@
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
                 </StackPanel.Background>
 
-                <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/language.png" Width="48" Height="48"></Image>
-                <Label Height="32" FontSize="14" FontWeight="Bold">API key</Label>
+                <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/key.png" Width="48" Height="48"></Image>
+                <Label Height="32" FontSize="14" FontWeight="Bold" Width="100">API key</Label>
                 <TextBox TextWrapping="Wrap" Height="28" Width="220" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" TextAlignment="Center"/>
+
+                <Button Margin="10" Height="32"  Width="155" Name="GetApiKey_Btn" Click="GetApiKey_Btn_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://siteoforigin:,,,/Resources/register.png" Width="32"/>
+                        <Label Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">Get API Key</Label>
+                    </StackPanel>
+                </Button>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="80">
@@ -633,7 +640,7 @@
                 </StackPanel.Background>
 
                 <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/folder.png" Width="48" Height="48"></Image>
-                <Label Height="32" FontSize="14" FontWeight="Bold">Directory</Label>
+                <Label Height="32" FontSize="14" FontWeight="Bold" Width="100">Directory</Label>
                 <TextBox TextWrapping="Wrap" Height="28" Width="220" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" TextAlignment="Center"/>
                 <Button Margin="10" Height="32"  Width="155" Click="SelectFileBtn_Click">
                     <StackPanel Orientation="Horizontal">
@@ -741,7 +748,7 @@
                 </StackPanel>
             </StackPanel>
 
-            <Image Name="FileBigPicture" Source="pack://siteoforigin:,,,/Resources/big3.jpg"/>
+            <Image Name="FileBigPicture" Source="pack://siteoforigin:,,,/Resources/big1.jpg"/>
 
             <ScrollViewer Height="230" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel HorizontalAlignment="Stretch" Name="FileDetails_Stack" Visibility="Collapsed">
@@ -801,11 +808,51 @@
                         <Label Grid.Row="2" Grid.Column="4">
                             <Hyperlink Name="FileReportLink" Click="FileReportLink_Click">Link</Hyperlink>
                         </Label>
+                    </Grid>
 
-                        <Label Name="FileReportAV0Name_Lbl" Content="0" Grid.Row="3" Grid.Column="0"/>
-                        <Label Name="FileReportAV0VirusName_Lbl" Content="0" Grid.Row="3" Grid.Column="1"/>
-                        <Label Name="FileReportAV0Update_Lbl" Grid.Row="3" Grid.Column="2"/>
-                        <Label Name="FileReportAV0Version_Lbl" Grid.Row="3" Grid.Column="3"/>
+                    <Grid ShowGridLines="True" Name="FileReport_Grid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="210" />
+                            <ColumnDefinition Width="210" />
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Label Content="Engine" Grid.Row="1" Grid.Column="0" FontWeight="Bold"/>
+                        <Label Content="Threat" Grid.Row="1" Grid.Column="1" FontWeight="Bold"/>
+                        <Label Content="Update" Grid.Row="1" Grid.Column="2" FontWeight="Bold"/>
+                        <Label Content="Version" Grid.Row="1" Grid.Column="3" FontWeight="Bold"/>
                     </Grid>
                 </StackPanel>
             </ScrollViewer>

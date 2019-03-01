@@ -263,14 +263,59 @@ namespace VTHelper
             FileReportDate_Lbl.Content = fileReport.ScanDate;
             FileReportPositives_Lbl.Content = fileReport.Positives;
             FileReportTotalEngines_Lbl.Content = fileReport.Total;
-            foreach(var item in fileReport.Scans)
+
+            if (fileReport.Positives < 3)
             {
-                if(item.Value.Detected)
+                FileScorePanel.Background = System.Windows.Media.Brushes.LightGreen;
+                FileScore_Lbl.Content = "(Safe)";
+                FileScore_Icon.Source = safeIcon;
+            }
+            else if (fileReport.Positives < 5)
+            {
+                FileScorePanel.Background = System.Windows.Media.Brushes.Orange;
+                FileScore_Lbl.Content = "(Be carefull)";
+                FileScore_Icon.Source = warningIcon;
+            }
+            else
+            {
+                FileScorePanel.Background = System.Windows.Media.Brushes.Red;
+                FileScore_Lbl.Content = "(Dangerous)";
+                FileScore_Icon.Source = dangerIcon;
+            }
+
+            int row = 2;
+            foreach (var item in fileReport.Scans)
+            {
+                if (item.Value.Detected)
                 {
-                    FileReportAV0Name_Lbl.Content = item.Key;
-                    FileReportAV0VirusName_Lbl.Content = item.Value.Result;
-                    FileReportAV0Update_Lbl.Content = item.Value.Update;
-                    FileReportAV0Version_Lbl.Content = item.Value.Version;
+                    System.Windows.Controls.Label name = new System.Windows.Controls.Label();
+                    System.Windows.Controls.Label virus = new System.Windows.Controls.Label();
+                    System.Windows.Controls.Label update = new System.Windows.Controls.Label();
+                    System.Windows.Controls.Label version = new System.Windows.Controls.Label();
+
+                    name.Content = item.Key;
+                    virus.Content = item.Value.Result;
+                    update.Content = item.Value.Update;
+                    version.Content = item.Value.Version;
+
+                    name.SetValue(Grid.RowProperty, row);
+                    name.SetValue(Grid.ColumnProperty, 0);
+
+                    virus.SetValue(Grid.RowProperty, row);
+                    virus.SetValue(Grid.ColumnProperty, 1);
+
+                    update.SetValue(Grid.RowProperty, row);
+                    update.SetValue(Grid.ColumnProperty, 2);
+
+                    version.SetValue(Grid.RowProperty, row);
+                    version.SetValue(Grid.ColumnProperty, 3);
+
+                    FileReport_Grid.Children.Add(name);
+                    FileReport_Grid.Children.Add(virus);
+                    FileReport_Grid.Children.Add(update);
+                    FileReport_Grid.Children.Add(version);
+
+                    ++row;
                 }
             }
         }
@@ -428,6 +473,10 @@ namespace VTHelper
             ScanIP_Panel.Visibility = Visibility.Hidden;
             ScanURL_Panel.Visibility = Visibility.Hidden;
 
+            // "pack://siteoforigin:,,,/Resources/big1.jpg"
+            // "pack://siteoforigin:,,,/Resources/big2.jpg"
+            // "pack://siteoforigin:,,,/Resources/big3.jpg"
+            // "pack://siteoforigin:,,,/Resources/big4.jpg"
             panel.Visibility = Visibility.Visible;
         }
 
@@ -556,6 +605,11 @@ namespace VTHelper
         private void URLReportURLDetectedURLLink_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start(urlReport.Permalink);
+        }
+
+        private void GetApiKey_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.virustotal.com/#/join-us");
         }
     }
 }
