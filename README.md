@@ -8,6 +8,10 @@ GUI for VirusTotal API.
 
 Based on https://github.com/Genbox/VirusTotal.Net
 
+![Scan file](https://github.com/arturfog/csharpVTHelper/raw/master/assets/scan_file.png)
+![Scan domain](https://github.com/arturfog/csharpVTHelper/raw/master/assets/scan_domain.png)
+![Scan url](https://github.com/arturfog/csharpVTHelper/raw/master/assets/scan_url.png)
+
 # Support this project
 - Star GitHub repository :star:
 - Create pull requests, submit bugs or suggest new features

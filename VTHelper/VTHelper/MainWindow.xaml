@@ -383,7 +383,7 @@
         <!-- ///////////////////////////// -->
         <!-- ////// SCAN URL START /////// -->
         <!-- ///////////////////////////// -->
-        <StackPanel HorizontalAlignment="Stretch" Margin="159,0,0,0" Name="ScanURL_Panel">
+        <StackPanel HorizontalAlignment="Stretch" Margin="159,0,0,0" Name="ScanURL_Panel" Visibility="Hidden">
             <StackPanel Orientation="Horizontal" Background="DimGray" Height="64">
                 <Label></Label>
                 <Image Source="pack://siteoforigin:,,,/Resources/url.png" Width="48"></Image>
@@ -672,7 +672,7 @@
         <!-- ///////////////////////////////// -->
         <!-- ////// SCAN FILE START ////////// -->
         <!-- ///////////////////////////////// -->
-        <StackPanel HorizontalAlignment="Stretch" Margin="159,0,0,0" Name="ScanFile_Panel" Visibility="Hidden">
+        <StackPanel HorizontalAlignment="Stretch" Margin="159,0,0,0" Name="ScanFile_Panel">
             <StackPanel Orientation="Horizontal" Background="DimGray" Width="Auto" Height="64">
                 <Label></Label>
                 <Image Source="pack://siteoforigin:,,,/Resources/256_scan_file.png" Width="48" Height="48"></Image>
@@ -730,7 +730,7 @@
                 </StackPanel>
             </StackPanel>
 
-            <StackPanel Height="82" Name="FileScorePanel" HorizontalAlignment="Stretch">
+            <StackPanel Height="82" Name="FileScorePanel" HorizontalAlignment="Stretch" Visibility="Collapsed">
                 <StackPanel.Background>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuColorKey}}"/>
                 </StackPanel.Background>
@@ -740,6 +740,8 @@
                     <Label Name="FileScore_Lbl" Content="(Unknown)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </StackPanel>
             </StackPanel>
+
+            <Image Name="FileBigPicture" Source="pack://siteoforigin:,,,/Resources/big3.jpg"/>
 
             <ScrollViewer Height="230" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel HorizontalAlignment="Stretch" Name="FileDetails_Stack" Visibility="Collapsed">

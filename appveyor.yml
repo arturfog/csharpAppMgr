@@ -1,11 +1,12 @@
 version: '0.1.{build}'
 # clone directory
 clone_folder: c:\projects\vthelper
-image: Visual Studio 2015
+image: Visual Studio 2017
 configuration: Release
 
 before_build:
-  - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86
+  # - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86
+  - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"
   - nuget install Newtonsoft.Json
 build:
         project: VTHelper\VTHelper.sln

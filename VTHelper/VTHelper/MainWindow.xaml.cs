@@ -257,6 +257,8 @@ namespace VTHelper
             FileReportSHA1_Lbl.Content = fileReport.SHA1;
 
             FileDetails_Stack.Visibility = Visibility.Visible;
+            FileScorePanel.Visibility = Visibility.Visible;
+            FileBigPicture.Visibility = Visibility.Collapsed;
 
             FileReportDate_Lbl.Content = fileReport.ScanDate;
             FileReportPositives_Lbl.Content = fileReport.Positives;
